@@ -1,0 +1,7 @@
+RewriteEngine On
+# If app is at http://localhost/recruitmentnewdesign-master/ use:
+RewriteBase /recruitmentnewdesign-master/
+# If app is at http://localhost/ (root) change to: RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L]
