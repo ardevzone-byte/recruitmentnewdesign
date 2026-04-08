@@ -3772,3 +3772,142 @@ tbody tr:hover td {
 .home .content .rows {
   max-width: 100%;
 }
+
+/* ========== اعتماد العروض — نص فاتح في الهيدر + رأس جدول أبيض ========== */
+.offers-approval-page .offers-approval-page__role-line,
+.offers-approval-page .offers-approval-page__role-line strong {
+  color: var(--ms-text-muted-on-dark) !important;
+}
+.offers-approval-page .offers-approval-page__role-line strong {
+  color: #fff !important;
+  font-weight: 700;
+}
+.offers-approval-page .offers-approval-page__table-shell {
+  border-radius: var(--ms-radius-section);
+  border: 1px solid var(--ms-border);
+  box-shadow: var(--ms-shadow-card);
+  background: #fff;
+}
+.offers-approval-page .offers-approval-page__inner-head h4 {
+  color: #181a3b !important;
+}
+.offers-approval-page .offers-approval-page__table-wrap {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-top: 1px solid var(--ms-border);
+  border-radius: 0 0 12px 12px;
+  background: #fff;
+}
+.offers-approval-page .table-custom thead th {
+  background: #ffffff !important;
+  color: #181a3b !important;
+  border-color: #e8eaf1 !important;
+  border-bottom: 2px solid #e5eaf0;
+}
+
+/* إدارة المسميات — شريط بحث أبيض مسطح */
+.job-titles-search-card .job-titles-search-card__head {
+  background: #fff !important;
+  border-bottom: 1px solid var(--ms-border);
+  color: #181a3b !important;
+}
+.job-titles-search-card .job-titles-search-card__head h5 {
+  color: #181a3b !important;
+}
+.job-titles-search-card .job-titles-search-card__head .bi {
+  color: #5c5e8a !important;
+}
+
+/* إضافة مرشح يدوي */
+.add-manual-candidate-page__section {
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--ms-border);
+  border-radius: var(--ms-radius-control);
+  background: var(--ms-surface-soft);
+}
+.add-manual-candidate-page__toggle-box {
+  background: #fff;
+  border: 1px solid var(--ms-border);
+  border-radius: var(--ms-radius-control);
+  padding: 1rem 1.25rem;
+}
+
+/* تقرير المناطق */
+.candidates-regions-page__card-head-light,
+.candidate-evaluations2-page__card-head-light {
+  background: linear-gradient(180deg, #f3f4f6 0%, #eceff4 100%) !important;
+  border-bottom: 1px solid var(--ms-border) !important;
+  color: #181a3b !important;
+}
+.candidates-regions-page__card-head-light h5 {
+  color: #181a3b !important;
+}
+.candidates-regions-page__stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+.candidates-regions-page .stat-card {
+  border: 1px solid var(--ms-border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  background: #fff;
+}
+.candidates-regions-page .stat-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+.candidates-regions-page .stat-num {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #5c5e8a;
+}
+.candidates-regions-page .stat-name {
+  font-weight: 600;
+  color: #181a3b;
+}
+.candidates-regions-page .muted {
+  color: var(--ms-text-muted-on-light) !important;
+}
+.candidates-regions-page__table-wrap {
+  border: 0;
+  border-radius: 0;
+}
+.candidates-regions-page .table-custom thead th {
+  background: #ffffff !important;
+  color: #181a3b !important;
+}
+
+/* تقييمات المرشح v2 */
+.candidate-evaluations2-page__card-head-light h5 {
+  color: #181a3b !important;
+}
+.candidate-evaluations2-page__hint {
+  font-size: 0.875rem;
+  color: var(--ms-text-muted-on-light);
+  background: rgba(242, 146, 32, 0.1);
+  border: 1px solid rgba(242, 146, 32, 0.25);
+  border-radius: 10px;
+  padding: 0.5rem 0.75rem;
+}
+.candidate-evaluations2-page .table-custom thead th {
+  background: #ffffff !important;
+  color: #181a3b !important;
+}
+
+/* لوحة التقارير التحليلية — عنوان موحّد بالكامل بلون فاتح (لا تمييز جزئي) */
+.reports-analytics-dashboard .heading-white .reports-analytics-dashboard__title,
+.reports-analytics-dashboard .heading-white .reports-analytics-dashboard__title * {
+  color: #fff !important;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+.reports-analytics-dashboard .heading-white .reports-analytics-dashboard__title::selection {
+  background: rgba(255, 255, 255, 0.35);
+  color: #fff;
+}

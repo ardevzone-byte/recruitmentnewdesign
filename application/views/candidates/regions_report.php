@@ -1,54 +1,47 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<style>
-.regions-report-embed { background: #f8fafc; padding: 0 0 2rem; }
-.regions-report-embed .wrap { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
-</style>
-<div class="regions-report-embed">
-<div class="wrap">
+
+<div dir="rtl" class="rows col-12 jobs-dashboard recruitment-page candidates-regions-page">
 
   <?php if (!empty($db_error)): ?>
-    <div class="alert alert-warning mb-3" role="alert"><?= html_escape($db_error) ?></div>
+    <div class="alert alert-warning mb-3" role="alert"><?= html_escape((string)($db_error ?? '')) ?></div>
   <?php endif; ?>
 
-  <!-- Header -->
-  <div class="glass mb-3 d-flex flex-wrap align-items-center justify-content-between gap-3">
-    <div>
-      <h1 class="page-title">تقرير المرشحين حسب المناطق</h1>
-      <div class="muted mt-1">
-        إجمالي النتائج: <span class="badge badge-soft px-2 py-1"><?= (int)$total ?></span>
+  <div class="block col-12 mb-3 heading-white">
+    <div class="head-table col-12 d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <div>
+        <h4 class="mb-1"><i class="bi bi-globe me-2"></i> تقرير المرشحين حسب المناطق</h4>
+        <p class="text-muted small mb-0">إجمالي النتائج: <strong><?= (int)$total ?></strong></p>
       </div>
-    </div>
-
-    <div class="d-flex gap-2 flex-wrap">
-      <a class="btn-marsom" href="<?= site_url('dashboard'); ?>">
-        <i class="fa-solid fa-house"></i> الرئيسية
-      </a>
-      <a class="btn-marsom primary" href="<?= site_url('candidates/regions'); ?>">
-        <i class="fa-solid fa-arrows-rotate"></i> تحديث
-      </a>
+      <div class="d-flex gap-2 flex-wrap">
+        <a class="button hex-btn small" href="<?= site_url('dashboard'); ?>"><i class="bi bi-house-door me-1"></i> الرئيسية</a>
+        <a class="button hex-btn small" href="<?= site_url('candidates/regions'); ?>"><i class="bi bi-arrow-clockwise me-1"></i> تحديث</a>
+      </div>
     </div>
   </div>
 
-  <!-- Filters -->
-  <div class="glass mb-3">
-    <form class="row g-2 align-items-end" method="get" action="<?= site_url('candidates/regions'); ?>">
-      <div class="col-lg-3">
-        <label class="fw-bold mb-1">بحث</label>
-        <input type="text" name="q" class="form-control" placeholder="اسم/ايميل/جوال/شركة/جنسية..." value="<?= html_escape($filters['q'] ?? '') ?>">
+  <div class="emp-table-card mb-3">
+    <div class="emp-table-card__head candidates-regions-page__card-head-light">
+      <h5 class="mb-0"><i class="bi bi-funnel me-2"></i> الفلاتر</h5>
+    </div>
+    <div class="emp-table-card__body p-3 p-md-4">
+    <form class="row g-3 align-items-end" method="get" action="<?= site_url('candidates/regions'); ?>">
+      <div class="col-lg-3 col-md-6">
+        <label class="form-label fw-semibold">بحث</label>
+        <input type="text" name="q" class="form-control" placeholder="اسم / إيميل / جوال / شركة / جنسية..." value="<?= html_escape($filters['q'] ?? '') ?>">
       </div>
 
-      <div class="col-lg-2">
-        <label class="fw-bold mb-1">من تاريخ</label>
+      <div class="col-lg-2 col-md-6">
+        <label class="form-label fw-semibold">من تاريخ</label>
         <input type="date" name="date_from" class="form-control" value="<?= html_escape($filters['date_from'] ?? '') ?>">
       </div>
 
-      <div class="col-lg-2">
-        <label class="fw-bold mb-1">إلى تاريخ</label>
+      <div class="col-lg-2 col-md-6">
+        <label class="form-label fw-semibold">إلى تاريخ</label>
         <input type="date" name="date_to" class="form-control" value="<?= html_escape($filters['date_to'] ?? '') ?>">
       </div>
 
-      <div class="col-lg-2">
-        <label class="fw-bold mb-1">المنطقة</label>
+      <div class="col-lg-2 col-md-6">
+        <label class="form-label fw-semibold">المنطقة</label>
         <select name="location" class="form-select">
           <option value="">الكل</option>
           <?php foreach(($allowed_locations ?? []) as $loc): ?>
@@ -59,25 +52,26 @@
         </select>
       </div>
 
-      <div class="col-lg-3 d-flex gap-2">
-        <button class="btn-marsom primary w-100" type="submit">
-          <i class="fa-solid fa-filter"></i> تطبيق الفلاتر
+      <div class="col-lg-3 col-md-12 d-flex flex-wrap gap-2">
+        <button class="button default orange small flex-grow-1" type="submit">
+          <i class="bi bi-funnel me-1"></i> تطبيق الفلاتر
         </button>
-        <a class="btn-marsom w-100" href="<?= site_url('candidates/regions'); ?>">
-          <i class="fa-solid fa-eraser"></i> تصفير
+        <a class="button hex-btn small flex-grow-1 justify-content-center" href="<?= site_url('candidates/regions'); ?>">
+          <i class="bi bi-eraser me-1"></i> تصفير
         </a>
       </div>
     </form>
+    </div>
   </div>
 
-  <!-- Dashboard -->
-  <div class="glass mb-3">
-    <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2">
-      <h5 class="mb-0 fw-bold"><i class="fa-solid fa-chart-pie me-1"></i> داشبورد سريع</h5>
-      <div class="muted">يعتمد على نفس الفلاتر الحالية</div>
+  <div class="emp-table-card mb-3">
+    <div class="emp-table-card__head candidates-regions-page__card-head-light">
+      <h5 class="mb-0"><i class="bi bi-pie-chart me-2"></i> داشبورد سريع</h5>
     </div>
+    <div class="emp-table-card__body p-3 p-md-4">
+    <p class="text-muted small mb-3">يعتمد على نفس الفلاتر الحالية</p>
 
-    <div class="stat-grid mb-3">
+    <div class="candidates-regions-page__stat-grid mb-3">
       <?php if(!empty($stats_by_location)): ?>
         <?php foreach($stats_by_location as $k => $v): ?>
           <div class="stat-card">
@@ -107,7 +101,7 @@
             <?php if(!empty($stats_by_nationality)): ?>
               <?php foreach($stats_by_nationality as $r): ?>
                 <?php $name = trim((string)($r['nationality'] ?? '')) ?: 'غير محدد'; ?>
-                <span class="badge badge-soft px-2 py-2">
+                <span class="badge rounded-pill text-bg-light border px-2 py-2">
                   <?= html_escape($name) ?>: <?= (int)$r['cnt'] ?>
                 </span>
               <?php endforeach; ?>
@@ -125,7 +119,7 @@
             <?php if(!empty($stats_by_company)): ?>
               <?php foreach($stats_by_company as $r): ?>
                 <?php $name = trim((string)($r['company'] ?? '')) ?: 'غير محدد'; ?>
-                <span class="badge badge-soft px-2 py-2">
+                <span class="badge rounded-pill text-bg-light border px-2 py-2">
                   <?= html_escape($name) ?>: <?= (int)$r['cnt'] ?>
                 </span>
               <?php endforeach; ?>
@@ -137,17 +131,19 @@
       </div>
     </div>
 
+    </div>
   </div>
 
-  <!-- Table -->
-  <div class="glass">
-    <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2">
-      <h5 class="mb-0 fw-bold"><i class="fa-solid fa-table me-1"></i> التفاصيل</h5>
-      <div class="muted">اضغط “تعديل” لتغيير كل بيانات المرشح من نفس الصفحة</div>
+  <div class="emp-table-card mb-4">
+    <div class="emp-table-card__head candidates-regions-page__card-head-light">
+      <h5 class="mb-0"><i class="bi bi-table me-2"></i> التفاصيل</h5>
     </div>
+    <div class="emp-table-card__body p-0">
+    <p class="text-muted small px-3 pt-3 mb-2">اضغط «تعديل» لتغيير بيانات المرشح من نفس الصفحة.</p>
 
-    <div class="table-responsive">
-      <table class="table table-bordered align-middle mb-0">
+    <div class="table-wrapper-rtl candidates-regions-page__table-wrap">
+    <div class="table-responsive w-100">
+      <table class="table table-custom table-bordered align-middle mb-0 w-100">
         <thead>
           <tr>
             <th>ID</th>
@@ -175,7 +171,7 @@
               <td><?= html_escape($row['full_name'] ?? '') ?></td>
               <td><?= html_escape($row['email'] ?? '') ?></td>
               <td><?= html_escape($row['phone'] ?? '') ?></td>
-              <td><span class="badge badge-soft px-2 py-2"><?= html_escape($row['work_location'] ?? '') ?></span></td>
+              <td><span class="badge rounded-pill text-bg-light border px-2 py-2"><?= html_escape($row['work_location'] ?? '') ?></span></td>
               <td><?= html_escape($row['company'] ?? '') ?></td>
               <td><?= html_escape($row['nationality'] ?? '') ?></td>
               <td><?= html_escape($row['marital_status'] ?? '') ?></td>
@@ -192,10 +188,10 @@
               <td>
                 <button
                   type="button"
-                  class="btn-marsom primary btn-sm"
+                  class="button hex-btn small"
                   onclick="openEditModal(<?= (int)$row['id'] ?>, this)"
                   data-row='<?= html_escape(json_encode($row, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)) ?>'>
-                  <i class="fa-solid fa-pen-to-square"></i> تعديل
+                  <i class="bi bi-pencil-square me-1"></i> تعديل
                 </button>
               </td>
             </tr>
@@ -205,6 +201,8 @@
         <?php endif; ?>
         </tbody>
       </table>
+    </div>
+    </div>
     </div>
   </div>
 
@@ -216,7 +214,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title fw-bold"><i class="fa-solid fa-user-pen me-1"></i> تعديل بيانات المرشح</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="إغلاق"></button>
       </div>
 
       <div class="modal-body">
@@ -275,12 +273,12 @@
 
           </div>
 
-          <div class="d-flex gap-2 mt-3">
-            <button type="submit" class="btn-marsom primary w-100" id="btnSave">
-              <i class="fa-solid fa-floppy-disk"></i> حفظ التعديلات
+          <div class="d-flex gap-2 mt-3 flex-wrap">
+            <button type="submit" class="button default orange small flex-grow-1 justify-content-center" id="btnSave">
+              <i class="bi bi-save me-1"></i> حفظ التعديلات
             </button>
-            <button type="button" class="btn-marsom w-100" data-bs-dismiss="modal">
-              <i class="fa-solid fa-xmark"></i> إغلاق
+            <button type="button" class="button hex-btn small flex-grow-1 justify-content-center" data-bs-dismiss="modal">
+              <i class="bi bi-x-lg me-1"></i> إغلاق
             </button>
           </div>
 
@@ -378,4 +376,3 @@ else compSel.selectedIndex = 0;
     return false;
   }
 </script>
-</div>

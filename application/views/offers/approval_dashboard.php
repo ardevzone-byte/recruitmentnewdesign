@@ -1,9 +1,9 @@
-<div dir="rtl" class="rows col-12 jobs-dashboard recruitment-page">
+<div dir="rtl" class="rows col-12 jobs-dashboard recruitment-page offers-approval-page">
     <div class="block col-12 mb-4 heading-white">
         <div class="head-table col-12 d-flex flex-wrap align-items-center justify-content-between gap-3">
             <div>
                 <h4><i class="bi bi-award me-2"></i> لوحة اعتماد العروض</h4>
-                <p class="text-muted mb-0">أنت تشاهد العروض بصفتك: <strong><?= $role_view ?></strong></p>
+                <p class="text-muted mb-0 offers-approval-page__role-line">أنت تشاهد العروض بصفتك: <strong><?= $role_view ?></strong></p>
             </div>
             <a href="<?= site_url('dashboard') ?>" class="button hex-btn small">
                 <i class="bi bi-arrow-right me-1"></i> العودة للرئيسية
@@ -27,13 +27,13 @@
         </div>
     <?php else: ?>
         <div class="block col-12">
-            <div class="box col-12">
-                <div class="head-table col-12 mb-3">
-                    <h4><i class="bi bi-clock text-warning me-2"></i> بانتظار موافقتك</h4>
+            <div class="box col-12 p-0 overflow-hidden offers-approval-page__table-shell">
+                <div class="head-table col-12 mb-0 px-3 py-3 offers-approval-page__inner-head">
+                    <h4 class="mb-0"><i class="bi bi-clock text-warning me-2"></i> بانتظار موافقتك</h4>
                 </div>
-            <div class="table-wrapper-rtl">
-            <div class="table-responsive">
-                <table class="table table-custom align-middle mb-0">
+            <div class="table-wrapper-rtl offers-approval-page__table-wrap">
+            <div class="table-responsive w-100">
+                <table class="table table-custom align-middle mb-0 w-100">
                     <thead>
                         <tr>
                             <th>رقم العرض</th>
@@ -72,6 +72,7 @@
                         <?php endforeach; ?>
                     </tbody>
                 </table>
+            </div>
             </div>
             </div>
         </div>

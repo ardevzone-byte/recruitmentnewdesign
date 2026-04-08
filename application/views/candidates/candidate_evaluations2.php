@@ -1,23 +1,17 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <div id="ce2Settings" data-update-base="<?= site_url('CandidateEvaluations2/update/') ?>" class="d-none" aria-hidden="true"></div>
-<style>
-.candidate-evaluations2-embed { background: #f8fafc; padding: 1rem 0 2rem; }
-.candidate-evaluations2-embed .wrap { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
-.candidate-evaluations2-embed .card { background: #fff; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,.08); border: 1px solid #e2e8f0; }
-.candidate-evaluations2-embed .btn { border-radius: 8px; }
-</style>
-<div class="candidate-evaluations2-embed">
-<div class="wrap">
 
-  <div class="header-nav">
-    <div class="title-box">
-      <h1>إدارة تقييمات المرشح</h1>
-      <p>بحث بالاسم ➜ اختر المرشح ➜ تُعرض Applications ثم التقييمات</p>
+<div dir="rtl" class="rows col-12 jobs-dashboard recruitment-page candidate-evaluations2-page">
+
+  <div class="block col-12 mb-3 heading-white">
+    <div class="head-table col-12 d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <div>
+        <h4 class="mb-1"><i class="bi bi-clipboard-data me-2"></i> إدارة تقييمات المرشح</h4>
+        <p class="text-muted small mb-0">بحث بالاسم ← اختر المرشح ← تُعرض الطلبات ثم التقييمات</p>
+      </div>
+      <a class="button hex-btn small" href="<?= site_url('dashboard'); ?>"><i class="bi bi-house-door me-1"></i> الرئيسية</a>
     </div>
-    <a class="btn-marsom" href="<?= base_url('dashboard'); ?>"><i class="fas fa-house"></i> الرئيسية</a>
   </div>
-
-  <div class="section">
 
     <?php
       $flash_type = $this->session->flashdata('flash_type');
@@ -31,68 +25,84 @@
       <div class="alert alert-danger mb-3"><?= html_escape($error) ?></div>
     <?php endif; ?>
 
-    <!-- Search -->
-    <div class="glass-card mb-3">
-      <form method="post" action="<?= base_url('CandidateEvaluations2/search'); ?>" class="row g-2 align-items-end">
+    <div class="emp-table-card mb-3">
+      <div class="emp-table-card__head candidate-evaluations2-page__card-head-light">
+        <h5 class="mb-0"><i class="bi bi-search me-2"></i> بحث باسم المرشح</h5>
+      </div>
+      <div class="emp-table-card__body p-3 p-md-4">
+      <form method="post" action="<?= base_url('CandidateEvaluations2/search'); ?>" class="row g-3 align-items-end">
         <div class="col-lg-9">
-          <label class="form-label">بحث باسم المرشح</label>
+          <label class="form-label fw-semibold">الاسم</label>
           <input type="text" name="q" value="<?= html_escape($q ?? '') ?>" class="form-control" placeholder="اكتب اسم المرشح...">
-          <div class="hint mt-2">سيتم عرض قائمة مرشحين، اختر المرشح لعرض Applications والتقييمات.</div>
+          <div class="candidate-evaluations2-page__hint mt-2">سيتم عرض قائمة مرشحين؛ اختر المرشح لعرض الطلبات والتقييمات.</div>
         </div>
         <div class="col-lg-3 d-grid">
-          <button class="btn-marsom primary justify-content-center" type="submit"><i class="fas fa-search"></i> بحث</button>
+          <button class="button default orange small justify-content-center" type="submit"><i class="bi bi-search me-1"></i> بحث</button>
         </div>
       </form>
+      </div>
     </div>
 
     <?php if (!empty($candidates)): ?>
-      <div class="glass-card mb-3">
-        <h5 style="font-family:'El Messiri',serif;font-weight:900"><i class="fas fa-users"></i> نتائج البحث</h5>
-        <div class="row g-2 mt-2">
+      <div class="emp-table-card mb-3">
+        <div class="emp-table-card__head candidate-evaluations2-page__card-head-light">
+          <h5 class="mb-0"><i class="bi bi-people me-2"></i> نتائج البحث</h5>
+        </div>
+        <div class="emp-table-card__body p-3 p-md-4">
+        <div class="row g-2">
           <?php foreach($candidates as $c): ?>
             <div class="col-md-6 col-lg-4">
-              <a class="btn-marsom w-100"
+              <a class="button hex-btn small w-100 justify-content-between"
                  href="<?= base_url('CandidateEvaluations2/select/' . (int)$c->id . '?q=' . urlencode($q)) ?>">
-                <i class="fas fa-user-check"></i>
-                <?= html_escape($c->full_name) ?>
-                <span class="ms-auto" dir="ltr">#<?= (int)$c->id ?></span>
+                <span><i class="bi bi-person-check me-1"></i><?= html_escape($c->full_name) ?></span>
+                <span dir="ltr">#<?= (int)$c->id ?></span>
               </a>
             </div>
           <?php endforeach; ?>
+        </div>
         </div>
       </div>
     <?php endif; ?>
 
     <?php if (!empty($selected)): ?>
-      <div class="glass-card mb-3">
+      <div class="emp-table-card mb-3">
+        <div class="emp-table-card__body p-3 p-md-4">
         <div class="d-flex flex-wrap gap-2 align-items-center justify-content-between">
           <div class="d-flex flex-wrap gap-2">
-            <span class="badge-soft"><i class="fa fa-user"></i> <?= html_escape($selected->full_name) ?></span>
-            <span class="badge-soft"><i class="fa fa-hashtag"></i> Candidate ID: <?= (int)$selected->id ?></span>
+            <span class="badge rounded-pill text-bg-light border"><i class="bi bi-person me-1"></i><?= html_escape($selected->full_name) ?></span>
+            <span class="badge rounded-pill text-bg-light border" dir="ltr">ID <?= (int)$selected->id ?></span>
           </div>
-          <div class="hint">تم جلب Applications ثم التقييمات حسب application_id = applications.id</div>
+          <div class="text-muted small">تم جلب الطلبات والتقييمات المرتبطة بهذا المرشح.</div>
+        </div>
         </div>
       </div>
 
-      <div class="glass-card mb-3">
-        <h5 style="font-family:'El Messiri',serif;font-weight:900"><i class="fas fa-layer-group"></i> Applications</h5>
+      <div class="emp-table-card mb-3">
+        <div class="emp-table-card__head candidate-evaluations2-page__card-head-light">
+          <h5 class="mb-0"><i class="bi bi-layers me-2"></i> الطلبات (Applications)</h5>
+        </div>
+        <div class="emp-table-card__body p-3 p-md-4">
         <?php if (!empty($apps)): ?>
           <div class="d-flex gap-2 flex-wrap mt-2">
             <?php foreach($apps as $a): ?>
-              <span class="badge-soft" dir="ltr">App #<?= (int)$a->id ?></span>
+              <span class="badge rounded-pill text-bg-light border" dir="ltr">App #<?= (int)$a->id ?></span>
             <?php endforeach; ?>
           </div>
         <?php else: ?>
-          <div class="hint mt-2">لا توجد Applications مرتبطة بهذا المرشح.</div>
+          <div class="text-muted small mt-2">لا توجد طلبات مرتبطة بهذا المرشح.</div>
         <?php endif; ?>
+        </div>
       </div>
 
       <!-- Add Evaluation -->
-      <div class="glass-card mb-3">
-        <h5 style="font-family:'El Messiri',serif;font-weight:900"><i class="fas fa-plus"></i> إضافة تقييم</h5>
+      <div class="emp-table-card mb-3">
+        <div class="emp-table-card__head candidate-evaluations2-page__card-head-light">
+          <h5 class="mb-0"><i class="bi bi-plus-circle me-2"></i> إضافة تقييم</h5>
+        </div>
+        <div class="emp-table-card__body p-3 p-md-4">
 
         <?php if (!empty($apps)): ?>
-          <form method="post" action="<?= base_url('CandidateEvaluations2/create'); ?>" class="row g-2 mt-2">
+          <form method="post" action="<?= base_url('CandidateEvaluations2/create'); ?>" class="row g-2">
             <input type="hidden" name="candidate_id" value="<?= (int)$selected->id ?>">
             <input type="hidden" name="return_q" value="<?= html_escape($q ?? '') ?>">
 
@@ -139,23 +149,27 @@
             </div>
 
             <div class="col-12 d-flex gap-2 flex-wrap">
-              <button class="btn-marsom primary" type="submit"><i class="fas fa-save"></i> حفظ</button>
-              <a class="btn-marsom" href="<?= base_url('CandidateEvaluations2/select/' . (int)$selected->id . '?q=' . urlencode($q ?? '')) ?>">
-                <i class="fas fa-rotate-right"></i> تحديث
+              <button class="button default orange small" type="submit"><i class="bi bi-save me-1"></i> حفظ</button>
+              <a class="button hex-btn small" href="<?= base_url('CandidateEvaluations2/select/' . (int)$selected->id . '?q=' . urlencode($q ?? '')) ?>">
+                <i class="bi bi-arrow-clockwise me-1"></i> تحديث
               </a>
             </div>
           </form>
         <?php else: ?>
-          <div class="hint mt-2">لا يمكن إضافة تقييم بدون وجود Application.</div>
+          <div class="text-muted small mt-2">لا يمكن إضافة تقييم بدون وجود طلب توظيف.</div>
         <?php endif; ?>
+        </div>
       </div>
 
       <!-- Evaluations Table -->
-      <div class="glass-card">
-        <h5 style="font-family:'El Messiri',serif;font-weight:900"><i class="fas fa-list-check"></i> التقييمات</h5>
-
-        <div class="table-responsive mt-2">
-          <table class="table table-bordered align-middle">
+      <div class="emp-table-card mb-4">
+        <div class="emp-table-card__head candidate-evaluations2-page__card-head-light">
+          <h5 class="mb-0"><i class="bi bi-list-check me-2"></i> التقييمات</h5>
+        </div>
+        <div class="emp-table-card__body p-0">
+        <div class="table-wrapper-rtl w-100">
+        <div class="table-responsive w-100">
+          <table class="table table-custom table-bordered align-middle mb-0 w-100">
             <thead>
               <tr>
                 <th>#</th>
@@ -225,11 +239,12 @@
             </tbody>
           </table>
         </div>
+        </div>
+        </div>
       </div>
 
     <?php endif; ?>
 
-  </div>
 </div>
 
 <!-- Modal واحد للتعديل -->
@@ -241,7 +256,7 @@
         <h5 class="modal-title" style="font-family:'El Messiri',serif;font-weight:900">
           تعديل تقييم <span id="editEvalIdText"></span>
         </h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="إغلاق"></button>
       </div>
 
       <form method="post" id="editEvalForm" action="">
@@ -292,6 +307,4 @@
 
     </div>
   </div>
-</div>
-
 </div>

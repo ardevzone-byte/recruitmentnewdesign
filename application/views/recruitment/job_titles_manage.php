@@ -21,15 +21,18 @@
     <div class="alert alert-danger mb-3"><?= html_escape($error) ?></div>
   <?php endif; ?>
 
-  <div class="block col-12 mb-4 heading-white">
-    <div class="head-table col-12">
+  <div class="emp-table-card mb-4 job-titles-search-card">
+    <div class="emp-table-card__head job-titles-search-card__head">
+      <h5 class="mb-0"><i class="bi bi-search me-2"></i> بحث في المسميات</h5>
+    </div>
+    <div class="emp-table-card__body p-3 p-md-4">
       <form method="get" action="<?= site_url('JobTitles'); ?>" class="row g-2 align-items-end">
         <div class="col-md-8">
-          <label class="form-label">بحث</label>
+          <label class="form-label text-secondary">نص البحث</label>
           <input type="text" name="q" value="<?= html_escape($q ?? '') ?>" class="form-control" placeholder="ابحث بالمسمى...">
         </div>
         <div class="col-md-4 d-grid">
-          <button class="button hex-btn" type="submit"><i class="bi bi-search me-1"></i> بحث</button>
+          <button class="button default orange small w-100 justify-content-center" type="submit"><i class="bi bi-search me-1"></i> بحث</button>
         </div>
       </form>
       <p class="small text-muted mt-3 mb-0">يُحدَّث تاريخ التسجيل تلقائياً عند إضافة مسمى أو تعديله.</p>

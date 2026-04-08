@@ -1,7 +1,7 @@
 <div dir="rtl" class="rows col-12 jobs-dashboard recruitment-page reports-analytics-dashboard">
     <div class="block col-12 mb-4 heading-white">
         <div class="head-table col-12 d-flex flex-wrap align-items-center justify-content-between gap-3">
-            <h4><i class="bi bi-bar-chart-line me-2"></i> لوحة التقارير التحليلية</h4>
+            <h4 class="reports-analytics-dashboard__title mb-0"><i class="bi bi-bar-chart-line me-2"></i> لوحة التقارير التحليلية</h4>
             <a href="<?= base_url('reports/export_excel?' . ($_SERVER['QUERY_STRING'] ?? '')) ?>" class="button hex-btn small">
                 <i class="bi bi-file-earmark-excel me-1"></i> تصدير Excel
             </a>

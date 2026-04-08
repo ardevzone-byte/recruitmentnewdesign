@@ -1,18 +1,25 @@
-<div dir="rtl" class="container mt-5">
-    <div class="card shadow-lg border-0">
-        <div class="card-header bg-primary text-white">
-            <h4 class="mb-0"><i class="fas fa-user-plus me-2"></i> إضافة مرشح يدوي</h4>
+<div dir="rtl" class="rows col-12 jobs-dashboard recruitment-page add-manual-candidate-page">
+    <div class="block col-12 mb-3 heading-white">
+        <div class="head-table col-12 d-flex flex-wrap align-items-center justify-content-between gap-3">
+            <div>
+                <h4 class="mb-1"><i class="bi bi-person-plus me-2"></i> إضافة مرشح يدوي</h4>
+                <p class="text-muted small mb-0">إدخال بيانات المرشح والوظيفة المرتبطة</p>
+            </div>
+            <a class="button hex-btn small" href="<?= site_url('dashboard'); ?>"><i class="bi bi-house-door me-1"></i> الرئيسية</a>
         </div>
-        <div class="card-body p-4">
-            
+    </div>
+
+    <div class="emp-table-card mb-4">
+        <div class="emp-table-card__body p-3 p-md-4">
+
             <?php if($this->session->flashdata('error_msg')): ?>
                 <div class="alert alert-danger"><?= $this->session->flashdata('error_msg') ?></div>
             <?php endif; ?>
 
             <?= form_open_multipart('candidates/submit_manual'); ?>
 
-            <div class="bg-light p-4 rounded border mb-4">
-                <h5 class="text-primary fw-bold mb-3"><i class="fas fa-briefcase"></i> حدد الوظيفة</h5>
+            <div class="add-manual-candidate-page__section mb-4">
+                <h5 class="fw-bold mb-3 text-secondary"><i class="bi bi-briefcase me-2"></i> حدد الوظيفة</h5>
                 
                 <div class="row g-3 align-items-center">
                     <div class="col-md-5">
@@ -30,15 +37,15 @@
                     </div>
 
                     <div class="col-md-5">
-                        <label class="form-label fw-bold text-success">2. أنشئ مسمى وظيفي جديد فوراً:</label>
-                        <input type="text" name="new_job_title" id="newJobInput" class="form-control border-success" placeholder="مثال: مدير مشروع">
+                        <label class="form-label fw-bold">2. أنشئ مسمى وظيفي جديد فوراً:</label>
+                        <input type="text" name="new_job_title" id="newJobInput" class="form-control" placeholder="مثال: مدير مشروع">
                         <small class="text-muted">سيتم إنشاء الوظيفة واعتمادها فوراً.</small>
                     </div>
                 </div>
             </div>
 
                 
-                    <div class="border rounded-3 p-3 bg-light mb-3">
+                    <div class="add-manual-candidate-page__section add-manual-candidate-page__toggle-box mb-3">
   <div class="d-flex align-items-start gap-3">
     
     <input class="form-check-input mt-1 ms-0" type="checkbox"
@@ -61,7 +68,7 @@
                  
 
 
-            <h5 class="text-secondary fw-bold mb-3"><i class="fas fa-user"></i> بيانات المرشح</h5>
+            <h5 class="fw-bold mb-3 text-secondary"><i class="bi bi-person me-2"></i> بيانات المرشح</h5>
 
             <div class="row">
 
@@ -178,8 +185,8 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
 
             <div class="d-grid gap-2 mt-4">
-                <button type="submit" class="btn btn-primary btn-lg fw-bold">
-                    <i class="fas fa-save me-2"></i> حفظ وفتح المسار (Pipeline)
+                <button type="submit" class="button default orange w-100 justify-content-center" style="min-height:48px;">
+                    <i class="bi bi-save me-2"></i> حفظ وفتح المسار (Pipeline)
                 </button>
             </div>
 
