@@ -2,45 +2,43 @@
 <style>
 .interview-report-embed { color: #181a3b; }
 .interview-report-embed .wrap { max-width: 100%; margin: 0; padding: 0; }
-.interview-report-embed .header { background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; padding: 16px; margin-bottom: 16px; }
-.interview-report-embed h1 { color: #181a3b; font-weight: 800; -webkit-text-fill-color: #181a3b; }
-.interview-report-embed .sub { color: #6b7280; }
 .interview-report-embed .section { background: transparent; border: 0; box-shadow: none; padding: 0; }
 .interview-report-embed .section::before { display: none; }
-.interview-report-embed .cardx { background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; color: #181a3b; }
+.interview-report-embed .cardx { background: #fff; border: 1px solid #e8eaf1; border-radius: 16px; color: #181a3b; box-shadow: 0 4px 20px rgba(24, 26, 59, 0.06); }
 .interview-report-embed .muted { color: #6b7280 !important; }
-.interview-report-embed .form-control, .interview-report-embed .form-select { background: #fff !important; color: #181a3b !important; border-color: #e5e7eb !important; }
+.interview-report-embed .form-control, .interview-report-embed .form-select { background: #fff !important; color: #181a3b !important; border-color: #e5e7eb !important; border-radius: 12px; }
 .interview-report-embed .table { --bs-table-color: #181a3b; color: #181a3b; }
 .interview-report-embed .table thead th { background: #f3f4f6; color: #181a3b; }
-.interview-report-embed .btnx { border: 1px solid #e5e7eb; background: #f9fafb; color: #181a3b; }
+.interview-report-embed .btnx { border: 1px solid #e5e7eb; background: #f9fafb; color: #181a3b; border-radius: 12px; }
 .interview-report-embed .btnx.primary { background: linear-gradient(135deg,#f29220,#e8890b); color: #fff; border: 0; }
 .interview-report-embed .badge-soft { background: #f3f4f6; border-color: #e5e7eb; color: #181a3b; }
-.interview-report-embed .table-wrap { height: auto; max-height: 420px; overflow: auto; }
+.interview-report-embed .table-wrap { height: auto; max-height: 420px; overflow: auto; border-radius: 12px; }
 @media print {
   .interview-report-embed .no-print, .interview-report-embed .actions, .interview-report-embed button, .interview-report-embed .btnx { display: none !important; }
 }
 </style>
-<div class="rows col-12 interview-report-embed">
+<div class="rows col-12 jobs-dashboard recruitment-page interview-report-embed">
 <div class="wrap">
 
   <?php if (!empty($db_error)): ?>
     <div class="alert alert-warning mb-3" role="alert"><?= html_escape($db_error) ?></div>
   <?php endif; ?>
 
-  <div class="header">
-    <div>
-      <h1>تقرير المقابلات الوظيفية</h1>
-      <div class="sub">Dashboard + فلاتر + تصدير Excel/CSV + طباعة</div>
-    </div>
-    <div class="d-flex gap-2 flex-wrap actions">
-      <a class="btnx" href="<?= base_url('dashboard'); ?>"><i class="fa fa-house"></i> الرئيسية</a>
-
+  <div class="block col-12 mb-4 heading-white">
+    <div class="head-table col-12 d-flex flex-wrap align-items-center justify-content-between gap-3">
+      <div>
+        <h4><i class="bi bi-mic me-2"></i> تقرير المقابلات الوظيفية</h4>
+        <p class="text-muted small mb-0">فلترة المرشحين والطلبات — تصدير CSV — طباعة</p>
+      </div>
+      <div class="d-flex gap-2 flex-wrap actions">
+        <a class="button hex-btn small" href="<?= site_url('dashboard'); ?>"><i class="bi bi-house-door me-1"></i> الرئيسية</a>
       <?php
         $qs = $_GET;
-        $exportUrl = base_url('InterviewReport/export_csv?' . http_build_query($qs));
+        $exportUrl = site_url('InterviewReport/export_csv?' . http_build_query($qs));
       ?>
-      <a class="btnx primary" href="<?= html_escape($exportUrl) ?>"><i class="fa fa-file-excel"></i> تصدير Excel (CSV)</a>
-      <button class="btnx" onclick="window.print()"><i class="fa fa-print"></i> طباعة</button>
+        <a class="button hex-btn small" href="<?= html_escape($exportUrl) ?>"><i class="bi bi-file-earmark-spreadsheet me-1"></i> تصدير Excel</a>
+        <button type="button" class="button hex-btn small" onclick="window.print()"><i class="bi bi-printer me-1"></i> طباعة</button>
+      </div>
     </div>
   </div>
 
@@ -92,17 +90,17 @@
     <div class="cardx mb-3 filters">
       <form method="get" class="row g-2 align-items-end">
         <div class="col-md-3">
-          <label class="form-label">من تاريخ (created_at)</label>
+          <label class="form-label">من تاريخ تسجيل المرشح</label>
           <input type="date" name="date_from" value="<?= html_escape($filters['date_from'] ?? '') ?>" class="form-control">
         </div>
         <div class="col-md-3">
-          <label class="form-label">إلى تاريخ (created_at)</label>
+          <label class="form-label">إلى تاريخ تسجيل المرشح</label>
           <input type="date" name="date_to" value="<?= html_escape($filters['date_to'] ?? '') ?>" class="form-control">
         </div>
 
         <div class="col-md-2">
-          <label class="form-label">حالة المرشح (applications.status)</label>
-          <input type="text" name="app_status" value="<?= html_escape($filters['app_status'] ?? '') ?>" class="form-control" placeholder="مثال: accepted/rejected/...">
+          <label class="form-label">حالة الطلب</label>
+          <input type="text" name="app_status" value="<?= html_escape($filters['app_status'] ?? '') ?>" class="form-control" placeholder="مثال: مقابلة">
         </div>
 
         <div class="col-md-2">
@@ -115,7 +113,7 @@
         </div>
 
         <div class="col-md-2">
-          <label class="form-label">موظف التوظيف (decision_by)</label>
+          <label class="form-label">مسؤول التوظيف (الرقم الوظيفي)</label>
           <input type="text" name="recruiter" value="<?= html_escape($filters['recruiter'] ?? '') ?>" class="form-control" placeholder="رقم وظيفي">
         </div>
 
@@ -206,8 +204,16 @@
                 $pill = ($r->overall_eval_status === 'completed') ? 'pill-ok' : 'pill-warn';
                 $statusText = $r->overall_eval_status_ar;
                 $cvBtn = '';
-                if (!empty($r->cv_file) && strpos($r->cv_file, 'uploads/') === 0) {
-                    $cvBtn = '<a class="btnx" target="_blank" rel="noopener" href="'.html_escape(base_url($r->cv_file)).'"><i class="fa fa-eye"></i> CV</a>';
+                $cvRaw = isset($r->cv_file) ? trim((string)$r->cv_file) : '';
+                if ($cvRaw !== '' && strcasecmp($cvRaw, 'N/A') !== 0) {
+                    if (strpos($cvRaw, 'uploads/') === 0) {
+                        $cvHref = base_url($cvRaw);
+                    } elseif (strpos($cvRaw, '/') === false && strpos($cvRaw, '\\') === false) {
+                        $cvHref = base_url('assets/cvs/' . $cvRaw);
+                    } else {
+                        $cvHref = base_url($cvRaw);
+                    }
+                    $cvBtn = '<a class="btnx" target="_blank" rel="noopener" href="'.html_escape($cvHref).'"><i class="fa fa-eye"></i> CV</a>';
                 }
               ?>
               <tr>

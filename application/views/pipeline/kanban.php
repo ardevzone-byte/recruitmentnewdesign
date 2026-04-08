@@ -1,8 +1,8 @@
-<div dir="rtl" class="rows col-12">
-    <div class="block col-12 mb-4">
+<div dir="rtl" class="rows col-12 jobs-dashboard recruitment-page">
+    <div class="block col-12 mb-4 heading-white">
         <div class="head-table col-12 d-flex flex-wrap align-items-center justify-content-between gap-3">
             <h4><i class="bi bi-columns-gap me-2"></i> <?= htmlspecialchars($title) ?></h4>
-            <a href="<?= base_url('jobs') ?>" class="button hex-btn white small">
+            <a href="<?= site_url('jobs') ?>" class="button hex-btn small">
                 <i class="bi bi-arrow-right me-1"></i> العودة للوظائف
             </a>
         </div>

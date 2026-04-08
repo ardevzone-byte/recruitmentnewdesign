@@ -1,11 +1,11 @@
-<div dir="rtl" class="rows col-12">
-    <div class="block col-12 mb-4">
+<div dir="rtl" class="rows col-12 jobs-dashboard recruitment-page">
+    <div class="block col-12 mb-4 heading-white">
         <div class="head-table col-12 d-flex flex-wrap align-items-center justify-content-between gap-3">
             <div>
                 <h4><i class="bi bi-award me-2"></i> لوحة اعتماد العروض</h4>
                 <p class="text-muted mb-0">أنت تشاهد العروض بصفتك: <strong><?= $role_view ?></strong></p>
             </div>
-            <a href="<?= base_url('dashboard') ?>" class="button hex-btn white small">
+            <a href="<?= site_url('dashboard') ?>" class="button hex-btn small">
                 <i class="bi bi-arrow-right me-1"></i> العودة للرئيسية
             </a>
         </div>
@@ -64,7 +64,7 @@
                                 <td class="fw-bold text-success"><?= number_format($offer['total_salary']) ?> ريال</td>
                                 <td><?= $offer['start_date'] ?></td>
                                 <td>
-                                    <a href="<?= base_url('offers/view/' . $offer['id']) ?>" class="button hex-btn small">
+                                    <a href="<?= site_url('offers/view/' . $offer['id']) ?>" class="button hex-btn small">
                                         <i class="bi bi-eye me-1"></i> مراجعة
                                     </a>
                                 </td>

@@ -129,7 +129,7 @@
             </div>
 
             <div class="col-md-3">
-              <label class="form-label">requested_by</label>
+              <label class="form-label">مقدّم الطلب / مرجع</label>
               <input type="text" name="requested_by" class="form-control">
             </div>
 
@@ -165,9 +165,9 @@
                 <th>الحالة</th>
                 <th>الراتب المتوقع</th>
                 <th>ملاحظات</th>
-                <th>created_at</th>
-                <th>completed_at</th>
-                <th>requested_by</th>
+                <th>تاريخ الإنشاء</th>
+                <th>تاريخ الإكمال</th>
+                <th>طالب التقييم</th>
                 <th style="width:170px">إجراء</th>
               </tr>
             </thead>
@@ -271,7 +271,7 @@
               <input type="number" step="0.01" name="recommended_salary" id="edit_salary" class="form-control">
             </div>
             <div class="col-md-4">
-              <label class="form-label">requested_by</label>
+              <label class="form-label">مقدّم الطلب / مرجع</label>
               <input type="text" name="requested_by" id="edit_requested" class="form-control">
             </div>
 

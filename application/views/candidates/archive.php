@@ -1,5 +1,5 @@
-<div dir="rtl" class="rows col-12">
-    <div class="block col-12 mb-4">
+<div dir="rtl" class="rows col-12 jobs-dashboard recruitment-page">
+    <div class="block col-12 mb-4 heading-white">
         <div class="head-table col-12 d-flex flex-wrap align-items-center justify-content-between gap-3">
             <h4><i class="bi bi-archive me-2"></i> أرشيف المرشحين</h4>
             <?php 

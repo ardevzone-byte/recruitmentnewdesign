@@ -2035,6 +2035,40 @@ public function get_candidates_by_idnumber_with_cv($id_number, $status4 = '2')
         return [];
       }
 
+    /**
+     * بيانات المتقدمين — المرحلة الأولى (جدول emp_candidate، ليس job_postings).
+     * يستبعد المعتمدين (status4 = 2) الموجودين في شاشة المعتمدين.
+     */
+    public function get_emp_candidate_list_first_stage()
+    {
+        if (!$this->db->table_exists('emp_candidate')) {
+            return [];
+        }
+        $this->db->from('emp_candidate');
+        $this->db->group_start();
+        $this->db->where('status4 IS NULL', null, false);
+        $this->db->or_where('status4 !=', '2');
+        $this->db->group_end();
+        $this->db->order_by('id', 'DESC');
+        $this->db->limit(2000);
+        return $this->db->get()->result_array();
+    }
+
+    /**
+     * المرشحين المعتمدين من رئيس اللجنة (emp_candidate مع status4 = 2).
+     */
+    public function get_emp_candidate_list_approved_stage()
+    {
+        if (!$this->db->table_exists('emp_candidate')) {
+            return [];
+        }
+        $this->db->from('emp_candidate');
+        $this->db->where('status4', '2');
+        $this->db->order_by('id', 'DESC');
+        $this->db->limit(2000);
+        return $this->db->get()->result_array();
+    }
+
       function get_emp_candidate_admin102558855555(){
         $id=$this->session->userdata('user_id');
         $id2='0';
@@ -2122,12 +2156,15 @@ public function get_candidates_by_idnumber_with_cv($id_number, $status4 = '2')
       }
 
        function get_emp_candidate_admin102555555510_done(){
+        if (!$this->db->table_exists('emp_candidate')) {
+            return [];
+        }
         $id=$this->session->userdata('user_id');
         $id2='2';
        // $id22='اخرى';
         $sql = "select * from emp_candidate where  status4='$id2';";
         $query = $this->db->query($sql);
-        return $query->result_array();
+        return $query ? $query->result_array() : [];
       }
 
       function get_emp_candidate_admin102555555510_done112(){

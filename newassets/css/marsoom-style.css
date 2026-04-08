@@ -151,6 +151,17 @@ button:hover {
   --btn-height: 52px;
   --btn-radius: 8px;
   /* للنعومة داخل الشكل */
+  /* توكنات الواجهة — نصوص وأسطح (تباين: سطح فاتح ↔ نص داكن، سطح داكن ↔ نص فاتح) */
+  --ms-text-on-light: #181a3b;
+  --ms-text-muted-on-light: #5c6470;
+  --ms-text-on-dark: #ffffff;
+  --ms-text-muted-on-dark: rgba(255, 255, 255, 0.9);
+  --ms-surface: #ffffff;
+  --ms-surface-soft: #f9fafb;
+  --ms-border: #e8eaf1;
+  --ms-radius-section: 16px;
+  --ms-radius-control: 12px;
+  --ms-shadow-card: 0 4px 20px rgba(24, 26, 59, 0.07);
 }
 
 .hex-btn {
@@ -923,6 +934,16 @@ button:hover {
 .head-table-block-white .head-table .text-muted {
   color: rgba(255,255,255,0.9) !important;
 }
+.heading-white .head-table h4 .bi,
+.heading-white .head-table h3 .bi,
+.head-table-block-white .head-table h4 .bi,
+.head-table-block-white .head-table h3 .bi {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+.heading-white .head-table strong,
+.head-table-block-white .head-table strong {
+  color: #fff !important;
+}
 .heading-white .hex-btn,
 .heading-white .button,
 .head-table-block-white .hex-btn,
@@ -937,6 +958,25 @@ button:hover {
 .head-table-block-white .button:hover {
   background: rgba(255,255,255,0.3) !important;
   color: #fff !important;
+}
+/* Outline / default actions in purple hero — keep legible on gradient */
+.heading-white .button.default.orange.outline,
+.head-table-block-white .button.default.orange.outline {
+  background: transparent !important;
+  color: #fff !important;
+  border: 2px solid rgba(255, 255, 255, 0.65) !important;
+}
+.heading-white .button.default.orange.outline:hover,
+.head-table-block-white .button.default.orange.outline:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: #fff !important;
+  border-color: #fff !important;
+}
+.heading-white .button.default:not(.orange),
+.head-table-block-white .button.default:not(.orange) {
+  background: rgba(255, 255, 255, 0.22) !important;
+  color: #fff !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
 }
 .head-table-block-white .title,
 .head-table-block-white h3.title {
@@ -3366,4 +3406,369 @@ tbody tr:hover td {
 }
 .sms-platform-page .modal-content {
   border-radius: 16px;
+}
+
+/* بيانات المتقدمين / المرشحين المعتمدين — card shell matches jobs dashboard */
+.data-emp-candidate-page .emp-table-card {
+  background: #fff;
+  border: 1px solid #e8eaf1;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(24, 26, 59, 0.06);
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+.data-emp-candidate-page .emp-table-card__head {
+  background: linear-gradient(135deg, #5c5e8a 0%, #7b7da8 100%);
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+.data-emp-candidate-page .emp-table-card__head h5 {
+  color: #fff !important;
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0;
+}
+.data-emp-candidate-page .emp-table-card__head h5 .bi {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+.data-emp-candidate-page .emp-table-card__body {
+  font-family: 'Tajawal', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  background: #fff;
+}
+.data-emp-candidate-page .emp-table-card .table-responsive {
+  border-radius: 0 0 12px 12px;
+  padding: 0.75rem !important;
+  -webkit-overflow-scrolling: touch;
+}
+.data-emp-candidate-page .emp-table-card__thead th {
+  background: linear-gradient(180deg, #f3f4f6 0%, #eceff4 100%) !important;
+  color: #181a3b !important;
+  font-family: 'Tajawal', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  vertical-align: middle;
+  white-space: normal;
+  word-break: break-word;
+  hyphens: auto;
+  border-color: #e5eaf0 !important;
+  padding: 12px 10px;
+  line-height: 1.35;
+}
+.data-emp-candidate-page .emp-table-card .table tbody td {
+  vertical-align: middle;
+  font-size: 14px;
+  padding: 10px;
+  border-color: #e8eaf1;
+}
+.data-emp-candidate-page .emp-table-card .table-striped > tbody > tr:nth-of-type(odd) > * {
+  background-color: rgba(92, 94, 138, 0.04);
+}
+.data-emp-candidate-page .emp-table-card .table-hover tbody tr:hover > * {
+  background-color: rgba(242, 146, 32, 0.08);
+}
+
+/* Candidate attachments — same card system as بيانات المتقدمين */
+.candidate-attachments-page .candidate-attachments-page__input {
+  border-radius: 12px;
+  border: 1px solid #e5eaf0;
+  min-height: 48px;
+}
+.candidate-attachments-page .candidate-attachments-page__input:focus {
+  border-color: #5c5e8a;
+  box-shadow: 0 0 0 3px rgba(92, 94, 138, 0.15);
+}
+.candidate-attachments-page .candidate-attachments-page__hint {
+  font-size: 0.875rem;
+  color: #5c5e8a;
+  background: rgba(242, 146, 32, 0.1);
+  border: 1px solid rgba(242, 146, 32, 0.25);
+  border-radius: 10px;
+  padding: 0.5rem 0.75rem;
+}
+.candidate-attachments-page .candidate-attachments-page__tile {
+  border: 1px solid #e8eaf1;
+  border-radius: 14px;
+  background: #fff;
+  padding: 1rem;
+  box-shadow: 0 2px 12px rgba(24, 26, 59, 0.05);
+  height: 100%;
+}
+.candidate-attachments-page .candidate-attachments-page__tile.is-done {
+  border-color: rgba(13, 137, 79, 0.35);
+  background: linear-gradient(180deg, #f6fdf9 0%, #fff 100%);
+}
+.candidate-attachments-page .candidate-attachments-page__tile.is-pending {
+  border-color: #e5eaf0;
+}
+.candidate-attachments-page .candidate-attachments-page__tile-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.65rem;
+}
+.candidate-attachments-page .candidate-attachments-page__tile-head .title {
+  font-weight: 600;
+  color: #181a3b;
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+.candidate-attachments-page .candidate-attachments-page__tile-head .badge {
+  font-weight: 600;
+  font-size: 0.72rem;
+  padding: 0.35em 0.65em;
+  border-radius: 8px;
+  background: rgba(92, 94, 138, 0.12) !important;
+  color: #181a3b !important;
+}
+.candidate-attachments-page .candidate-attachments-page__tile.is-done .candidate-attachments-page__tile-head .badge {
+  background: rgba(13, 137, 79, 0.15) !important;
+  color: #0a5c36 !important;
+}
+.candidate-attachments-page .candidate-attachments-page__file {
+  border-radius: 10px;
+  border: 1px solid #e5eaf0;
+}
+.candidate-attachments-page .button.default.orange {
+  border-radius: 12px !important;
+}
+
+/* Sidebar — rounded active state (replaces hover.png hex tile) */
+.sidebar ul li a:hover:not(.nav-link-muted),
+.sidebar ul li a.active:not(.nav-link-muted) {
+  background-image: none !important;
+  background: linear-gradient(135deg, rgba(92, 94, 138, 0.14) 0%, rgba(123, 125, 168, 0.22) 100%) !important;
+  background-size: auto !important;
+  border-radius: 12px !important;
+  color: #181a3b !important;
+}
+.sidebar ul li a.nav-link-muted:hover {
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+/* لوحة التقارير التحليلية — rounded shell (reports/dashboard.php) */
+.reports-analytics-dashboard > .block .box.col-12 {
+  background: #fff;
+  border: 1px solid #e8eaf1;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(24, 26, 59, 0.06);
+}
+.reports-analytics-dashboard .form-control,
+.reports-analytics-dashboard .form-select {
+  border-radius: 12px;
+  border: 1px solid #e5eaf0;
+}
+.reports-analytics-dashboard .form-control:focus,
+.reports-analytics-dashboard .form-select:focus {
+  border-color: #5c5e8a;
+  box-shadow: 0 0 0 3px rgba(92, 94, 138, 0.12);
+}
+.reports-analytics-dashboard .card {
+  border-radius: 16px !important;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+  box-shadow: 0 6px 24px rgba(24, 26, 59, 0.1) !important;
+}
+.reports-analytics-dashboard .card .card-header {
+  border-radius: 0 !important;
+  border-bottom: 1px solid #e8eaf1;
+  background: #f9fafb !important;
+  color: #181a3b !important;
+  font-weight: 600;
+}
+.reports-analytics-dashboard .card.shadow.mb-5 .card-header.bg-dark {
+  background: linear-gradient(135deg, #5c5e8a 0%, #4b4d6e 100%) !important;
+  color: #fff !important;
+  border-bottom: none;
+  border-radius: 16px 16px 0 0 !important;
+}
+
+/* الوصف الوظيفي — index: hero stays gradient; list card is white rounded */
+.job-description-page > .block.head-table-block-white:first-child {
+  border-radius: 16px;
+}
+.job-description-page > .block.head-table-block-white:not(:first-child) {
+  background: #fff !important;
+  border: 1px solid #e8eaf1 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 20px rgba(24, 26, 59, 0.06);
+  padding: 0 !important;
+  overflow: hidden;
+}
+.job-description-page > .block.head-table-block-white:not(:first-child) h3.title {
+  background: linear-gradient(135deg, #f3f4f6 0%, #eceff4 100%) !important;
+  color: #181a3b !important;
+  padding: 14px 20px !important;
+  margin: 0 !important;
+  border-bottom: 1px solid #e8eaf1;
+  font-size: 1.05rem;
+}
+.job-description-page > .block.head-table-block-white:not(:first-child) .box {
+  padding: 0 0 1rem !important;
+}
+.job-description-page > .block.head-table-block-white:not(:first-child) .table-wrapper-rtl {
+  margin: 0 1rem 1rem;
+  border: 1px solid #e8eaf1;
+  border-radius: 12px;
+  box-shadow: none;
+}
+.job-description-page > .block.head-table-block-white:not(:first-child) thead,
+.job-description-page > .block.head-table-block-white:not(:first-child) thead th {
+  background: linear-gradient(180deg, #f3f4f6 0%, #ebecef 100%) !important;
+  color: #181a3b !important;
+  border-color: #e5eaf0 !important;
+}
+
+/* ========== Marsoom shell — كل الصفحات التي تستخدم new_header ========== */
+/* منطقة المحتوى فاتحة: نص داكن ومتوهّم */
+.home .content {
+  color: var(--ms-text-on-light);
+}
+.home .content a:not(.button):not(.hex-btn):not(.btn):not(.badge):not(.page-link) {
+  color: #4150a0;
+}
+.home .content a:not(.button):not(.hex-btn):not(.btn):hover {
+  color: var(--orange-1);
+}
+
+/* بطاقات وصناديق فاتحة داخل المحتوى */
+.home .content .block .box {
+  border: 1px solid var(--ms-border);
+  border-radius: var(--ms-radius-section);
+  box-shadow: var(--ms-shadow-card);
+  background: var(--ms-surface);
+  color: var(--ms-text-on-light);
+}
+.home .content .block .box:not(.fast) h1,
+.home .content .block .box:not(.fast) h2,
+.home .content .block .box:not(.fast) h3,
+.home .content .block .box:not(.fast) h4 {
+  color: var(--ms-text-on-light);
+}
+.home .content .block .box p,
+.home .content .block .box .text-muted {
+  color: var(--ms-text-muted-on-light) !important;
+}
+
+/* عناصر نماذج عامة — حواف ناعمة + تباين */
+.home .content .form-control,
+.home .content .form-select {
+  border-radius: var(--ms-radius-control);
+  border: 1px solid var(--ms-border);
+  color: var(--ms-text-on-light);
+  background-color: var(--ms-surface);
+}
+.home .content .form-control:focus,
+.home .content .form-select:focus {
+  border-color: #5c5e8a;
+  box-shadow: 0 0 0 3px rgba(92, 94, 138, 0.15);
+  color: var(--ms-text-on-light);
+}
+.home .content .form-label,
+.home .content label.col-form-label {
+  color: var(--ms-text-on-light);
+  font-weight: 600;
+}
+
+/* بطاقات Bootstrap داخل المحتوى: نص داكن على سطح فاتح */
+.home .content .card {
+  border-radius: var(--ms-radius-section);
+  border: 1px solid var(--ms-border);
+  box-shadow: var(--ms-shadow-card);
+  color: var(--ms-text-on-light);
+  background: var(--ms-surface);
+}
+.home .content .card .card-body,
+.home .content .card .card-title {
+  color: inherit;
+}
+.home .content .card.text-white,
+.home .content .card.text-white .card-body {
+  color: var(--ms-text-on-dark) !important;
+}
+.home .content .card.text-white .text-white-50 {
+  color: var(--ms-text-muted-on-dark) !important;
+}
+
+/* رؤوس وبطاقات داكنة (KPI ملوّنة): يبقى النص فاتح */
+.home .content .card.bg-primary,
+.home .content .card.bg-success,
+.home .content .card.bg-info,
+.home .content .card.bg-warning,
+.home .content .card.bg-danger,
+.home .content .card.bg-dark {
+  color: var(--ms-text-on-dark) !important;
+  border: none;
+}
+.home .content .card.bg-primary .card-body,
+.home .content .card.bg-success .card-body,
+.home .content .card.bg-info .card-body,
+.home .content .card.bg-warning .card-body {
+  color: inherit;
+}
+.home .content .card.bg-warning,
+.home .content .card.bg-warning .card-text {
+  color: #1a1a1a !important;
+}
+.home .content .card.bg-warning small.text-white-50 {
+  color: rgba(0, 0, 0, 0.55) !important;
+}
+
+/* جداول على خلفية فاتحة */
+.home .content .table {
+  --bs-table-color: var(--ms-text-on-light);
+  color: var(--ms-text-on-light);
+}
+.home .content .table thead th {
+  color: var(--ms-text-on-light);
+  background: var(--ms-surface-soft);
+  border-color: var(--ms-border);
+}
+
+/* شريط الأبطال / كتل داكنة: نص فاتح (تأكيد) */
+.heading-white,
+.heading-white .head-table,
+.head-table-block-white .head-table {
+  color: var(--ms-text-on-dark);
+}
+.heading-white .head-table a:not(.button):not(.hex-btn),
+.head-table-block-white .head-table a:not(.button):not(.hex-btn) {
+  color: var(--ms-text-on-dark);
+}
+.heading-white .text-muted,
+.head-table-block-white .head-table .text-muted {
+  color: var(--ms-text-muted-on-dark) !important;
+}
+/* تسميات النماذج داخل البطاقة البنفسجية — أغلب من .home .content .form-label */
+.home .content .heading-white .form-label,
+.heading-white .form-label,
+.home .content .head-table-block-white .head-table .form-label {
+  color: var(--ms-text-on-dark) !important;
+}
+.heading-white .form-control,
+.heading-white .form-select {
+  background: #fff !important;
+  color: var(--ms-text-on-light) !important;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+.heading-white .form-control::placeholder {
+  color: #6b7280;
+}
+.heading-white .form-control:focus,
+.heading-white .form-select:focus {
+  border-color: #f29220;
+  box-shadow: 0 0 0 3px rgba(242, 146, 32, 0.25);
+}
+
+/* تنبيهات: الحفاظ على ألوان Bootstrap مع حدود ناعمة */
+.home .content .alert {
+  border-radius: var(--ms-radius-control);
+}
+
+/* صفوف full-width بدون قص أفقي */
+.home .content .rows {
+  max-width: 100%;
 }

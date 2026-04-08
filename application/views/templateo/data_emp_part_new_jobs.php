@@ -1,37 +1,24 @@
-<div class="rows col-12 jobs-dashboard recruitment-page">
+<div class="rows col-12 jobs-dashboard recruitment-page data-emp-candidate-page">
  <div id="main-content">
-        <div class="container-fluid">
-            <div class="block-header">
-                <div class="row">
-                    <div class="col-lg-5 col-md-8 col-sm-12">                        
-                        <h2 style="font-family: 'Tajawal', sans-serif; font-weight: bold;
-    font-style: normal; font-size:20px;"><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-right"></i></a>           مرشحي التوظيف المرحلة الأولى</h2>
-                        <ul class="breadcrumb">
-                           
-                            
-                        </ul>
-                    </div>            
-                    
+        <div class="container-fluid px-0">
+            <div class="block col-12 mb-3 heading-white">
+                <div class="head-table col-12">
+                    <h4 class="mb-0"><i class="bi bi-person-lines-fill me-2"></i> مرشحي التوظيف — المرحلة الأولى</h4>
                 </div>
             </div>
-            
             <div class="row clearfix">
-                
                 <div class="col-lg-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2 style="font-family: 'Tajawal', sans-serif; font-weight: bold;
-    font-style: normal; font-size:20px;">             مرشحين التوظيف<small><!-- All Users In insert_sadad --></small> </h2>                            
+                    <div class="emp-table-card">
+                        <div class="emp-table-card__head">
+                            <h5 class="mb-0"><i class="bi bi-table me-2"></i> مرشحو التوظيف</h5>
                         </div>
-                        <div class="body" style="font-family: 'Tajawal', sans-serif; font-weight: bold;
-    font-style: normal; font-size:20px;">
-                            <div class="table-responsive">    
+                        <div class="body emp-table-card__body px-0 pt-0">
+                            <div class="table-responsive px-2 pb-2">    
                           <!--   <table class="table table-bordered table-hover table-striped" cellspacing="0" id="addrowExample"> -->
 
                                 <table    class="table table-bordered table-striped table-hover dataTable js-exportable" cellspacing="0">
-                                      <thead style="background-color:#007bff; color:#ffffff;">
-                             <tr style="font-family: 'Tajawal', sans-serif; font-weight: bold;
-    font-style: normal; font-size:15px;">
+                                      <thead class="emp-table-card__thead">
+                             <tr>
                                <th> الرقم </th>  
                                <th> الاسم </th>
                                  <th>  مرفق السيرة الذاتية </th>

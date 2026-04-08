@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<div dir="rtl" class="rows col-12">
+<div dir="rtl" class="rows col-12 jobs-dashboard recruitment-page job-description-page">
     <div class="block col-12 mb-4 head-table-block-white">
         <div class="head-table col-12 d-flex flex-wrap align-items-center justify-content-between gap-3">
             <div>

@@ -2662,26 +2662,26 @@ $data['cuntt_emp_candidate1sultanall5553']=$this->user_model->cuntt_emp_candidat
                     if ($this ->session->userdata('type') == 1) {
                         $data['user'] = $this->user_model->get_customersid6();
 
-                      $data['customers'] = $this->user_model->get_emp_candidate_admin1025555555();
+                      $data['customers'] = $this->user_model->get_emp_candidate_list_first_stage();
                       
                     }elseif ($this ->session->userdata('type') == 3) {
 
 
                       $data['user'] = $this->user_model->get_customersid6();
 
-                      $data['customers'] = $this->user_model->get_emp_candidate_admin1025555555();
+                      $data['customers'] = $this->user_model->get_emp_candidate_list_first_stage();
 
                       
                     }elseif ($this ->session->userdata('type') == 4) {
                       $data['user'] = $this->user_model->get_customersid6();
 
-                      $data['customers'] = $this->user_model->get_emp_candidate_admin1025555555();
+                      $data['customers'] = $this->user_model->get_emp_candidate_list_first_stage();
                     }elseif ($this ->session->userdata('type') == 2) {
                       $data['user'] = $this->user_model->get_customersid6();
 
-                      $data['customers'] = $this->user_model->get_emp_candidate_admin1025555555();
+                      $data['customers'] = $this->user_model->get_emp_candidate_list_first_stage();
                     }elseif ($this ->session->userdata('type') == 7) {
-                      $data['customers'] = $this->user_model->get_emp_candidate_admin1025555555();
+                      $data['customers'] = $this->user_model->get_emp_candidate_list_first_stage();
                     }
           $data['title'] = 'مرشحي التوظيف — المرحلة الأولى';
           $data['extra_css'] = [
@@ -2973,26 +2973,26 @@ $data['cuntt_emp_candidate1sultanall5553']=$this->user_model->cuntt_emp_candidat
                     if ($this ->session->userdata('type') == 1) {
                         $data['user'] = $this->user_model->get_customersid6();
 
-                      $data['customers'] = $this->user_model->get_emp_candidate_admin1025555555();
+                      $data['customers'] = $this->user_model->get_emp_candidate_list_approved_stage();
                       
                     }elseif ($this ->session->userdata('type') == 3) {
 
 
                       $data['user'] = $this->user_model->get_customersid6();
 
-                      $data['customers'] = $this->user_model->get_emp_candidate_admin102555555510_done();
+                      $data['customers'] = $this->user_model->get_emp_candidate_list_approved_stage();
 
                       
                     }elseif ($this ->session->userdata('type') == 4) {
                       $data['user'] = $this->user_model->get_customersid6();
 
-                      $data['customers'] = $this->user_model->get_emp_candidate_admin1025555555();
+                      $data['customers'] = $this->user_model->get_emp_candidate_list_approved_stage();
                     }elseif ($this ->session->userdata('type') == 2) {
                       $data['user'] = $this->user_model->get_customersid6();
 
-                      $data['customers'] = $this->user_model->get_emp_candidate_admin1025555555();
+                      $data['customers'] = $this->user_model->get_emp_candidate_list_approved_stage();
                     }elseif ($this ->session->userdata('type') == 7) {
-                      $data['customers'] = $this->user_model->get_emp_candidate_admin102555555510_done();
+                      $data['customers'] = $this->user_model->get_emp_candidate_list_approved_stage();
                     }
           $data['title'] = 'معتمد من قبل رئيس اللجنة';
           $data['extra_css'] = [

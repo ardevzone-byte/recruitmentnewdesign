@@ -6,7 +6,7 @@
   <div class="block col-12 mb-4 heading-white">
     <div class="head-table col-12">
       <h4><i class="bi bi-person-badge me-2"></i> <?= html_escape($title ?? 'إدارة المسميات الوظيفية') ?></h4>
-      <p class="mb-0 text-muted">إضافة / تعديل / حذف المسميات (جدول job_postings)</p>
+      <p class="mb-0 text-muted">إضافة / تعديل / حذف المسميات الوظيفية</p>
     </div>
   </div>
 
@@ -21,17 +21,19 @@
     <div class="alert alert-danger mb-3"><?= html_escape($error) ?></div>
   <?php endif; ?>
 
-  <div class="block col-12 mb-4">
-    <form method="get" action="<?= site_url('JobTitles'); ?>" class="row g-2 align-items-end">
-      <div class="col-md-8">
-        <label class="form-label">بحث</label>
-        <input type="text" name="q" value="<?= html_escape($q ?? '') ?>" class="form-control" placeholder="ابحث بالمسمى...">
-      </div>
-      <div class="col-md-4 d-grid">
-        <button class="button hex-btn" type="submit"><i class="bi bi-search me-1"></i> بحث</button>
-      </div>
-    </form>
-    <p class="small text-muted mt-2 mb-0">يتم تحديث created_at عند الإضافة أو التعديل.</p>
+  <div class="block col-12 mb-4 heading-white">
+    <div class="head-table col-12">
+      <form method="get" action="<?= site_url('JobTitles'); ?>" class="row g-2 align-items-end">
+        <div class="col-md-8">
+          <label class="form-label">بحث</label>
+          <input type="text" name="q" value="<?= html_escape($q ?? '') ?>" class="form-control" placeholder="ابحث بالمسمى...">
+        </div>
+        <div class="col-md-4 d-grid">
+          <button class="button hex-btn" type="submit"><i class="bi bi-search me-1"></i> بحث</button>
+        </div>
+      </form>
+      <p class="small text-muted mt-3 mb-0">يُحدَّث تاريخ التسجيل تلقائياً عند إضافة مسمى أو تعديله.</p>
+    </div>
   </div>
 
   <div class="block col-12">
@@ -42,7 +44,7 @@
             <tr>
               <th style="width:90px">ID</th>
               <th>المسمى الوظيفي</th>
-              <th style="width:220px">created_at</th>
+              <th style="width:220px">تاريخ التسجيل</th>
               <th style="width:200px">إجراء</th>
             </tr>
           </thead>

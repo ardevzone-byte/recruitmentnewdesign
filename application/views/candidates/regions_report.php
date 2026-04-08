@@ -20,7 +20,7 @@
     </div>
 
     <div class="d-flex gap-2 flex-wrap">
-      <a class="btn-marsom" href="<?= site_url('Dashboard'); ?>">
+      <a class="btn-marsom" href="<?= site_url('dashboard'); ?>">
         <i class="fa-solid fa-house"></i> الرئيسية
       </a>
       <a class="btn-marsom primary" href="<?= site_url('candidates/regions'); ?>">
