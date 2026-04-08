@@ -29,7 +29,13 @@
     <div class="body">
         <ul>
             <li><a class="<?= $is_path('dashboard'); ?>" href="<?= site_url('dashboard'); ?>"><i class="bi bi-speedometer2"></i> لوحة التحكم</a></li>
-            <li><a class="<?= $is_path('onboarding/my_tasks'); ?>" href="<?= site_url('onboarding/my_tasks'); ?>"><i class="bi bi-list-task"></i> مهام التهيئة </a></li>
+
+            <!-- <li><a class="<?= $is_path('onboarding/my_tasks'); ?>" href="<?= site_url('onboarding/my_tasks'); ?>"><i class="bi bi-list-task"></i> مهام التهيئة </a></li> -->
+
+
+            <li><a href="#" class="nav-link-muted">                   
+                   <i class="bi bi-list-task"></i> مهام التهيئة </a></li>
+
             <li><a class="<?= $is_path('jobs'); ?>" href="<?= site_url('jobs'); ?>"><i class="bi bi-megaphone"></i> إدارة الوظائف</a></li>
             <li><a class="<?= $is_path('offers'); ?>" href="<?= site_url('offers'); ?>"><i class="bi bi-award"></i> اعتماد العروض</a></li>
             <li><a class="<?= $is_path('job_description'); ?>" href="<?= site_url('job_description'); ?>"><i class="bi bi-journal-text"></i> الوصف الوظيفي</a></li>
@@ -38,7 +44,11 @@
             <li><a class="<?= $is_path('candidates/add_manual'); ?>" href="<?= site_url('candidates/add_manual'); ?>"><i class="bi bi-person-plus"></i> إضافة مرشح يدوياً</a></li>
             <li><a class="<?= $is_path('candidateattachments'); ?>" href="<?= site_url('CandidateAttachments'); ?>"><i class="bi bi-paperclip"></i> مرفقات المرشح</a></li>
             <li><a class="<?= $is_path('candidateevaluations2'); ?>" href="<?= site_url('CandidateEvaluations2'); ?>"><i class="bi bi-clipboard-data"></i> إدارة تقييمات المرشح</a></li>
-            <li><a class="<?= $is_path('interviewreport'); ?>" href="<?= site_url('InterviewReport'); ?>"><i class="bi bi-mic"></i> تقرير المقابلات الوظيفية</a></li>
+                        
+            <!-- <li><a class="<?= $is_path('interviewreport'); ?>" href="<?= site_url('InterviewReport'); ?>"><i class="bi bi-mic"></i> تقرير المقابلات الوظيفية</a></li> -->
+            
+            <li><a href="#" class="nav-link-muted" ><i class="bi bi-mic"></i> تقرير المقابلات الوظيفية</a></li>
+
             <li><a class="<?= $is_path('reports'); ?>" href="<?= site_url('reports'); ?>"><i class="bi bi-bar-chart-line"></i> لوحة التقارير</a></li>
             <li><a class="<?= $is_path('candidates/regions'); ?>" href="<?= site_url('candidates/regions'); ?>"><i class="bi bi-globe"></i> تقرير المرشحين حسب المناطق</a></li>
             <li><a class="<?= $is_path('joboffersreport'); ?>" href="<?= site_url('JobOffersReport'); ?>"><i class="bi bi-file-earmark-bar-graph"></i> تقرير العروض الوظيفية</a></li>
