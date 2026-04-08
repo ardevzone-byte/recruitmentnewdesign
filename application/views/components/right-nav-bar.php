@@ -29,7 +29,7 @@
     <div class="body">
         <ul>
             <li><a class="<?= $is_path('dashboard'); ?>" href="<?= site_url('dashboard'); ?>"><i class="bi bi-speedometer2"></i> لوحة التحكم</a></li>
-            <li><a class="<?= $is_path('onboarding/my_tasks'); ?>" href="<?= site_url('onboarding/my_tasks'); ?>"><i class="bi bi-list-task"></i> مهام التهيئة (Onboarding)</a></li>
+            <li><a class="<?= $is_path('onboarding/my_tasks'); ?>" href="<?= site_url('onboarding/my_tasks'); ?>"><i class="bi bi-list-task"></i> مهام التهيئة </a></li>
             <li><a class="<?= $is_path('jobs'); ?>" href="<?= site_url('jobs'); ?>"><i class="bi bi-megaphone"></i> إدارة الوظائف</a></li>
             <li><a class="<?= $is_path('offers'); ?>" href="<?= site_url('offers'); ?>"><i class="bi bi-award"></i> اعتماد العروض</a></li>
             <li><a class="<?= $is_path('job_description'); ?>" href="<?= site_url('job_description'); ?>"><i class="bi bi-journal-text"></i> الوصف الوظيفي</a></li>
