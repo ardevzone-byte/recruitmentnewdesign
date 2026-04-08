@@ -1,14 +1,17 @@
-<div dir="rtl" class="rows col-12">
+<div dir="rtl" class="rows col-12 jobs-dashboard recruitment-page requisitions-create-page">
+  <div class="block col-12 mb-4 heading-white">
+    <div class="head-table col-12">
+      <h4><i class="bi bi-file-earmark-plus me-2"></i> إنشاء طلب احتياج وظيفي جديد</h4>
+      <p class="mb-0 text-muted">أكمل البيانات أدناه ثم أرسل الطلب لمسار الاعتماد.</p>
+    </div>
+  </div>
+
   <div class="block col-12 col-lg-10 mx-auto">
     <div class="box col-12 p-4">
       <?php if (validation_errors()): ?>
         <div class="alert alert-danger" role="alert"><?php echo validation_errors(); ?></div>
       <?php endif; ?>
 
-      <div class="head-table col-12 mb-4">
-        <h4><i class="bi bi-file-earmark-plus me-2"></i> إنشاء طلب احتياج وظيفي جديد</h4>
-      </div>
-          
       <?php echo form_open('requisitions/submit'); ?>
 
         <h5 class="text-primary fw-bold mb-3">1. تفاصيل الوظيفة</h5>

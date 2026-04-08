@@ -978,6 +978,18 @@ button:hover {
   color: #fff !important;
   border-color: rgba(255, 255, 255, 0.35) !important;
 }
+/* أزرار برتقالية صلبة داخل شريط البطولة — لا تُستبدل بشفافية بيضاء */
+.heading-white .button.default.orange:not(.outline),
+.head-table-block-white .button.default.orange:not(.outline) {
+  background: linear-gradient(0.96deg, #f29220 21.22%, #d68220 68.41%) !important;
+  color: #fff !important;
+  border-color: transparent !important;
+}
+.heading-white .button.default.orange:not(.outline):hover,
+.head-table-block-white .button.default.orange:not(.outline):hover {
+  filter: brightness(1.05);
+  color: #fff !important;
+}
 .head-table-block-white .title,
 .head-table-block-white h3.title {
   color: #fff !important;
@@ -3808,9 +3820,32 @@ tbody tr:hover td {
   border-bottom: 2px solid #e5eaf0;
 }
 
-/* إدارة المسميات — شريط بحث أبيض مسطح */
-.job-titles-search-card .job-titles-search-card__head {
+/* إدارة المسميات — بطاقة بحث بيضاء كاملة (على خلفية البطولة الداكنة) */
+.job-titles-search-card.emp-table-card {
   background: #fff !important;
+  border: 1px solid var(--ms-border) !important;
+  border-radius: var(--ms-radius-section) !important;
+  box-shadow: var(--ms-shadow-card);
+  overflow: hidden;
+}
+.job-titles-search-card .emp-table-card__body {
+  background: #fff !important;
+  color: #181a3b !important;
+}
+.job-titles-search-card .emp-table-card__body .form-label,
+.job-titles-search-card .emp-table-card__body label {
+  color: #5c6470 !important;
+}
+.job-titles-search-card .emp-table-card__body .form-control {
+  background: #fff !important;
+  color: #181a3b !important;
+  border: 1px solid var(--ms-border);
+}
+.job-titles-search-card .emp-table-card__body .text-muted {
+  color: var(--ms-text-muted-on-light) !important;
+}
+.job-titles-search-card .job-titles-search-card__head {
+  background: linear-gradient(180deg, #f3f4f6 0%, #eceff4 100%) !important;
   border-bottom: 1px solid var(--ms-border);
   color: #181a3b !important;
 }
@@ -3819,6 +3854,157 @@ tbody tr:hover td {
 }
 .job-titles-search-card .job-titles-search-card__head .bi {
   color: #5c5e8a !important;
+}
+
+/* تقرير العروض الوظيفية — بطاقات فاتحة + جدول Marsoom */
+.job-offers-report-host .job-offers-report-host__card.emp-table-card {
+  background: #fff !important;
+  border: 1px solid var(--ms-border) !important;
+  border-radius: var(--ms-radius-section) !important;
+  box-shadow: var(--ms-shadow-card);
+  overflow: hidden;
+}
+.job-offers-report-host .job-offers-report-host__card-head {
+  background: linear-gradient(180deg, #f3f4f6 0%, #eceff4 100%) !important;
+  border-bottom: 1px solid var(--ms-border) !important;
+  color: #181a3b !important;
+}
+.job-offers-report-host .job-offers-report-host__card-head h5 {
+  color: #181a3b !important;
+}
+.job-offers-report-host .job-offers-report-host__card-head .bi {
+  color: #5c5e8a !important;
+}
+.job-offers-report-host .jor-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+.job-offers-report-host .jor-stat-card {
+  border: 1px solid var(--ms-border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  background: var(--ms-surface-soft, #f9fafb);
+}
+.job-offers-report-host .jor-stat-label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--ms-text-muted-on-light);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.job-offers-report-host .jor-stat-value {
+  margin-top: 6px;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #5c5e8a;
+}
+.job-offers-report-host .job-offers-report-host__table-shell {
+  border-radius: 12px;
+}
+.job-offers-report-host .job-offers-report-host__table-scroll {
+  max-height: min(70vh, 720px);
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.job-offers-report-host .table-custom thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #ffffff !important;
+  color: #181a3b !important;
+  box-shadow: 0 1px 0 var(--ms-border);
+}
+.job-offers-report-host .jor-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--ms-border);
+  background: #f3f4f6;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: #181a3b;
+}
+.job-offers-report-host .jor-subtle {
+  color: var(--ms-text-muted-on-light) !important;
+  font-size: 0.85rem;
+}
+.job-offers-report-host .jor-editable {
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 10px;
+  display: inline-block;
+  background: #f3f4f6;
+  border: 1px dashed #c5cad6;
+  transition: border-color 0.2s, background 0.2s;
+  color: #181a3b;
+  min-width: 110px;
+  text-align: center;
+}
+.job-offers-report-host .jor-editable:hover {
+  border-color: #f29220;
+  background: #fff8f0;
+}
+.job-offers-report-host .jor-editable[data-empty="1"] {
+  opacity: 0.75;
+}
+.job-offers-report-host .jor-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+}
+.job-offers-report-host .jor-detail-item {
+  background: var(--ms-surface-soft, #f9fafb);
+  border: 1px solid var(--ms-border);
+  border-radius: 12px;
+  padding: 12px;
+}
+.job-offers-report-host .jor-detail-k {
+  color: var(--ms-text-muted-on-light);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.job-offers-report-host .jor-detail-v {
+  margin-top: 6px;
+  color: #181a3b;
+}
+.job-offers-report-host .jor-toast {
+  position: fixed;
+  bottom: 18px;
+  right: 18px;
+  left: auto;
+  width: min(420px, calc(100% - 36px));
+  z-index: 9999;
+  display: none;
+  background: #fff;
+  border: 1px solid var(--ms-border);
+  border-radius: 14px;
+  padding: 12px 14px;
+  box-shadow: var(--ms-shadow-card);
+}
+.job-offers-report-host .jor-toast.show {
+  display: block;
+  animation: jor-toast-pop 0.2s ease-out;
+}
+@keyframes jor-toast-pop {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.job-offers-report-host .jor-toast #toastTitle {
+  font-weight: 800;
+  color: #181a3b;
+}
+.job-offers-report-host .jor-toast #toastMsg {
+  color: var(--ms-text-muted-on-light) !important;
 }
 
 /* إضافة مرشح يدوي */
