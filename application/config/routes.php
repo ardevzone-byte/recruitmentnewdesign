@@ -44,7 +44,6 @@ $route['MdPendingEvaluations'] = 'MdPendingEvaluations/index';
 $route['MdPendingEvaluations/export_csv'] = 'MdPendingEvaluations/export_csv';
 
 
-$route['seed/job_descriptions'] = 'Seed/job_descriptions';
 $route['job_description']                   = 'JobDescription/index';
 $route['job_description/create']            = 'JobDescription/create';
 $route['job_description/store']             = 'JobDescription/store';
@@ -55,9 +54,6 @@ $route['job_description/export_pdf/(:num)'] = 'JobDescription/export_pdf/$1';
 
 
 
-$route['JobOffersReport'] = 'JobOffersReport/index';
-$route['JobOffersReport/ajax_list'] = 'JobOffersReport/ajax_list';
-
 $route['SmsPlatform'] = 'SmsPlatform/index';
 $route['SmsPlatform/send'] = 'SmsPlatform/send';
 $route['SmsPlatform/dashboard'] = 'SmsPlatform/dashboard';
@@ -65,9 +61,6 @@ $route['SmsPlatform/details/(:num)'] = 'SmsPlatform/details/$1';
 $route['SmsPlatform/export_csv'] = 'SmsPlatform/export_csv';
 $route['SmsPlatform/export_recipients_csv/(:num)'] = 'SmsPlatform/export_recipients_csv/$1';
 
-$route['jobs/view/(:num)'] = 'Jobs/view/$1';
-$route['candidates'] = 'Candidates/archive';
-$route['offers'] = 'Offers/dashboard';
 $route['candidates/regions'] = 'Candidates_regions_report/index';
 $route['candidates/regions/update/(:num)'] = 'Candidates_regions_report/update/$1';
 
