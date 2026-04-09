@@ -860,16 +860,6 @@ function new_app(){
          }
 
 
-
-         public function test(){ 
-        
-         $this->load->view('test'); 
-        
-         }
-
-
-
-
           public function update_order101001hrs50($dd){
         // Check login
         if(!$this ->session->userdata('logged_in')){
@@ -2970,18 +2960,20 @@ $data['cuntt_emp_candidate1sultanall5553']=$this->user_model->cuntt_emp_candidat
 
                       $data['customers'] = $this->user_model->get_emp_candidate_admin1025555555();
                     }elseif ($this ->session->userdata('type') == 7) {
-                      $data['user'] = $this->user_model->get_customersid6();
                       $data['customers'] = $this->user_model->get_emp_candidate_admin102555555510_done();
-                    }
-          $data['title'] = 'المرشحين المعتمدين';
-          $data['extra_css'] = [
-              'https://cdn.datatables.net/1.13.8/css/dataTables.bootstrap5.min.css',
-          ];
-          $data['extra_js'] = [
-              'https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js',
-              'https://cdn.datatables.net/1.13.8/js/dataTables.bootstrap5.min.js',
-          ];
-          $data['after_js_view'] = 'includes/datatables-basic-init';
+                    } 
+        
+        
+          // $data['title'] = 'المرشحين المعتمدين';
+          // $data['extra_css'] = [
+          //     'https://cdn.datatables.net/1.13.8/css/dataTables.bootstrap5.min.css',
+          // ];
+          // $data['extra_js'] = [
+          //     'https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js',
+          //     'https://cdn.datatables.net/1.13.8/js/dataTables.bootstrap5.min.js',
+          // ];
+          // $data['after_js_view'] = 'includes/datatables-basic-init';       
+         
           $this->load->view('template/new_header', $data);
           $this->load->view('templateo/data_emp_part_new_jobs10_done', $data);
           $this->load->view('template/new_footer', $data);
@@ -3082,19 +3074,11 @@ $data['cuntt_emp_candidate1sultanall5553']=$this->user_model->cuntt_emp_candidat
             $data['id'] = $this->uri->segment(3,0);
             $id = $data['id']; 
             $data['customers'] = $this->user_model->get_emp_candidate_admin102555555510_done225($id);
-            $data['user'] = $this->user_model->get_customersid6();
-            $data['title'] = 'المرشحين المعتمدين';
-            $data['extra_css'] = [
-                'https://cdn.datatables.net/1.13.8/css/dataTables.bootstrap5.min.css',
-            ];
-            $data['extra_js'] = [
-                'https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js',
-                'https://cdn.datatables.net/1.13.8/js/dataTables.bootstrap5.min.js',
-            ];
-            $data['after_js_view'] = 'includes/datatables-basic-init';
-            $this->load->view('template/new_header', $data);
-            $this->load->view('templateo/data_emp_part_new_jobs10_done', $data);
-            $this->load->view('template/new_footer', $data);
+
+
+                   
+          $this->load->view('templateo/header');    
+          $this->load->view('templateo/data_emp_part_new_jobs10_done', $data);
       }
     }
 
