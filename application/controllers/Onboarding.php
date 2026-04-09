@@ -116,15 +116,6 @@ class Onboarding extends CI_Controller
         $candidate_info = $this->db->get_where("candidates", ["id" => $candidate_id])->row_array();
         $log_messages = [];
 
-        if (!$this->db->table_exists("onboarding_tasks")) {
-            $this->session->set_flashdata(
-                "error_msg",
-                "جدول onboarding_tasks غير موجود. نفّذ database/onboarding_tasks_table.sql على قاعدة recruitment ثم أعد المحاولة.",
-            );
-            redirect("onboarding/initiate/" . $app_id);
-            return;
-        }
-
         // 2. Loop and Send
         foreach ($tasks as $task) {
             // A. Insert Task to Database (Your existing code)
@@ -292,8 +283,7 @@ class Onboarding extends CI_Controller
         } else {
             $this->session->set_flashdata("error_msg", "فشل الإرسال: لا يوجد بريد إلكتروني.");
         }
-        $app_id = is_array($task) && isset($task["application_id"]) ? (int) $task["application_id"] : 0;
-        redirect($app_id > 0 ? "onboarding/track/" . $app_id : "dashboard");
+        redirect("onboarding/track/" . $task["application_id"]);
     }
 
     // 5. Employee View: My Tasks
@@ -317,7 +307,7 @@ class Onboarding extends CI_Controller
 
         // Verify ownership
         $task = $this->onboarding_model->get_task_by_id($task_id);
-        if (empty($task) || ($task["assignee_user_id"] ?? "") != $uid) {
+        if ($task["assignee_user_id"] != $uid) {
             redirect("dashboard");
         }
 

@@ -494,7 +494,9 @@ class Candidates extends CI_Controller
         $data["title"] = "الملف الشخصي: " . $candidate["full_name"];
 
         // 5. Load View
+        $this->load->view("template/new_header", $data);
         $this->load->view("candidates/view_profile", $data);
+        $this->load->view("template/new_footer");
     }
     public function link_job($candidate_id)
     {
@@ -1109,9 +1111,9 @@ class Candidates extends CI_Controller
             "مطلوب استكمال البيانات",
         ];
 
-        //    $this->load->view('template/new_header', $data);
+        $this->load->view("template/new_header", $data);
         $this->load->view("candidates/view_profile", $data);
-        //   $this->load->view('template/new_footer');
+        $this->load->view("template/new_footer");
     }
     // --- NEW: Request Evaluation (RM Action) ---
     // In application/controllers/Candidates.php
@@ -1158,44 +1160,39 @@ class Candidates extends CI_Controller
         $user_id = $this->session->userdata("username");
         $data["title"] = "المهام والتقارير";
 
-        $tasks = [];
-        if ($this->db->table_exists("candidate_evaluations")) {
-            // 1. Fetch Basic Task Data
-            $this->db->select("ce.*, c.full_name, j.job_title, a.id as application_id");
-            $this->db->from("candidate_evaluations ce");
-            $this->db->join("applications a", "a.id = ce.application_id");
-            $this->db->join("candidates c", "c.id = a.candidate_id");
-            $this->db->join("job_postings j", "j.id = a.job_id");
+        // 1. Fetch Basic Task Data
+        $this->db->select("ce.*, c.full_name, j.job_title, a.id as application_id");
+        $this->db->from("candidate_evaluations ce");
+        $this->db->join("applications a", "a.id = ce.application_id");
+        $this->db->join("candidates c", "c.id = a.candidate_id");
+        $this->db->join("job_postings j", "j.id = a.job_id");
 
-            $this->db->group_start();
-            $this->db->where("a.decision_status !=", "Rejected");
-            $this->db->or_where("a.decision_status", null);
-            $this->db->group_end();
+        $this->db->group_start();
+        $this->db->where("a.decision_status !=", "Rejected");
+        $this->db->or_where("a.decision_status", null);
+        $this->db->group_end();
 
-            $this->db->where("ce.evaluator_user_id", $user_id);
-            $this->db->where("ce.status", "pending");
-            $this->db->order_by("ce.created_at", "DESC");
+        $this->db->where("ce.evaluator_user_id", $user_id);
+        $this->db->where("ce.status", "pending");
+        $this->db->order_by("ce.created_at", "DESC");
 
-            $tasks = $this->db->get()->result_array();
+        $tasks = $this->db->get()->result_array();
 
-            // Find Salary entered by 1526 OR 1291 for this candidate
-            foreach ($tasks as &$task) {
-                $salary_data = $this->db
-                    ->select("recommended_salary")
-                    ->from("candidate_evaluations")
-                    ->where("application_id", $task["application_id"])
-                    ->where_in("evaluator_user_id", ["1526", "1291", "3141"])
-                    ->where("recommended_salary >", 0)
-                    ->get()
-                    ->row_array();
+        // ---------------------------------------------------------
+        // ✅ FIX: Find Salary entered by 1526 OR 1291 for this candidate
+        // ---------------------------------------------------------
+        foreach ($tasks as &$task) {
+            $salary_data = $this->db
+                ->select("recommended_salary")
+                ->from("candidate_evaluations")
+                ->where("application_id", $task["application_id"])
+                ->where_in("evaluator_user_id", ["1526", "1291", "3141"]) // The Tech Evaluators
+                ->where("recommended_salary >", 0)
+                ->get()
+                ->row_array();
 
-                $task["tech_salary"] = $salary_data ? $salary_data["recommended_salary"] : "";
-            }
-        } else {
-            $this->session->set_flashdata(
-                "error_msg",
-                "جدول candidate_evaluations غير موجود. نفّذ database/candidate_evaluations_table.sql على قاعدة recruitment.",
-            );
+            // Store it in 'tech_salary' index
+            $task["tech_salary"] = $salary_data ? $salary_data["recommended_salary"] : "";
         }
         $data["tasks"] = $tasks;
         // ---------------------------------------------------------
@@ -1207,15 +1204,11 @@ class Candidates extends CI_Controller
             $data["team_users"] = $report_data["users"];
             $data["job_columns"] = $report_data["jobs"];
             $data["matrix_data"] = $report_data["matrix"];
-        } else {
-            $data["team_users"] = [];
-            $data["job_columns"] = [];
-            $data["matrix_data"] = [];
         }
 
         $this->load->view("template/new_header", $data);
         $this->load->view("candidates/my_evaluations", $data);
-        $this->load->view("template/new_footer", $data);
+        $this->load->view("template/new_footer");
     }
     // --- NEW: Submit Evaluation (Manager Action) ---
     public function submit_evaluation_result()
@@ -1225,12 +1218,6 @@ class Candidates extends CI_Controller
         }
 
         $eval_id = $this->input->post("eval_id");
-
-        if (!$this->db->table_exists("candidate_evaluations")) {
-            $this->session->set_flashdata("error", "جدول candidate_evaluations غير موجود في قاعدة البيانات.");
-            redirect("candidates/my_pending_evaluations");
-            return;
-        }
 
         // Prepare Data
         $data = [

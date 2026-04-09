@@ -8,18 +8,6 @@ class CandidateEvaluations2 extends CI_Controller
         $this->load->model('Candidate_evaluations2_model', 'cem2');
         $this->load->helper(['url', 'form', 'security']);
         $this->load->library(['session', 'form_validation']);
-
-        if (!$this->session->userdata('logged_in')) {
-            redirect('users/login');
-        }
-    }
-
-    private function _render(array $data)
-    {
-        $data['extra_js'] = ['newassets/js/candidate-evaluations2.js'];
-        $this->load->view('template/new_header', $data);
-        $this->load->view('candidates/candidate_evaluations2', $data);
-        $this->load->view('template/new_footer', $data);
     }
 
     public function index()
@@ -33,7 +21,9 @@ class CandidateEvaluations2 extends CI_Controller
             'evals'      => [],
             'error'      => null,
         ];
-        $this->_render($data);
+        $this->load->view('template/new_header', $data);
+        $this->load->view('candidates/candidate_evaluations2', $data);
+        $this->load->view('template/new_footer');
     }
 
     // بحث بالاسم (يعرض قائمة مرشحين)
@@ -53,7 +43,10 @@ class CandidateEvaluations2 extends CI_Controller
 
         if ($q === '') {
             $data['error'] = 'فضلاً اكتب اسم المرشح للبحث.';
-            return $this->_render($data);
+            $this->load->view('template/new_header', $data);
+            $this->load->view('candidates/candidate_evaluations2', $data);
+            $this->load->view('template/new_footer');
+            return;
         }
 
         $data['candidates'] = $this->cem2->search_candidates_by_name($q);
@@ -62,7 +55,9 @@ class CandidateEvaluations2 extends CI_Controller
             $data['error'] = 'لم يتم العثور على مرشح مطابق للاسم.';
         }
 
-        $this->_render($data);
+        $this->load->view('template/new_header', $data);
+        $this->load->view('candidates/candidate_evaluations2', $data);
+        $this->load->view('template/new_footer');
     }
 
     // اختيار مرشح وإظهار applications + evaluations
@@ -83,13 +78,19 @@ class CandidateEvaluations2 extends CI_Controller
 
         if ($candidate_id <= 0) {
             $data['error'] = 'معرّف المرشح غير صحيح.';
-            return $this->load->view('candidates/candidate_evaluations2', $data);
+            $this->load->view('template/new_header', $data);
+            $this->load->view('candidates/candidate_evaluations2', $data);
+            $this->load->view('template/new_footer');
+            return;
         }
 
         $selected = $this->cem2->get_candidate($candidate_id);
         if (!$selected) {
             $data['error'] = 'المرشح غير موجود.';
-            return $this->load->view('candidates/candidate_evaluations2', $data);
+            $this->load->view('template/new_header', $data);
+            $this->load->view('candidates/candidate_evaluations2', $data);
+            $this->load->view('template/new_footer');
+            return;
         }
 
         $apps = $this->cem2->get_applications_by_candidate($candidate_id);
@@ -109,7 +110,9 @@ class CandidateEvaluations2 extends CI_Controller
             $data['candidates'] = $this->cem2->search_candidates_by_name($q);
         }
 
-        $this->_render($data);
+        $this->load->view('template/new_header', $data);
+        $this->load->view('candidates/candidate_evaluations2', $data);
+        $this->load->view('template/new_footer');
     }
 
     public function create()

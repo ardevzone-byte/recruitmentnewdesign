@@ -6,10 +6,6 @@ class JobOffersReport extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Job_offers_model');
-        $this->load->library('session');
-        if (!$this->session->userdata('logged_in')) {
-            redirect('users/login');
-        }
     }
 
     public function index()
@@ -21,15 +17,15 @@ class JobOffersReport extends CI_Controller
         ];
 
         $data['title']        = 'تقرير العروض الوظيفية';
-        $data['filters']    = $filters;
+        $data['filters']      = $filters;
         $data['offers']       = $this->Job_offers_model->get_list($filters);
         $data['stats']        = $this->Job_offers_model->get_stats($filters);
-        $data['embed_shell']  = true;
-        $data['extra_css']    = 'https://unpkg.com/aos@2.3.1/dist/aos.css';
+        $data['embed_shell']   = true;
+        $data['extra_css']     = 'https://unpkg.com/aos@2.3.1/dist/aos.css';
 
         $this->load->view('template/new_header', $data);
         $this->load->view('job_offers/report', $data);
-        $this->load->view('template/new_footer', $data);
+        $this->load->view('template/new_footer');
     }
 
     // ✅ Live Search يرجع Rows فقط

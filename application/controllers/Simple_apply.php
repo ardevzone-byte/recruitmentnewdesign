@@ -122,20 +122,14 @@ if (!empty($_FILES['cv_file']['name'])) {
             return;
         }
 
-        // Create Application (support schemas with applied_at and/or created_at only)
-        $ts = date('Y-m-d H:i:s');
+        // Create Application
         $application_data = [
             'job_id'           => $job_id,
             'candidate_id'     => $candidate_id,
             'status'           => 'تقديم أولي',
             'application_type' => 'simple',
+            'applied_at'       => date('Y-m-d H:i:s')
         ];
-        if ($this->db->field_exists('applied_at', 'applications')) {
-            $application_data['applied_at'] = $ts;
-        }
-        if ($this->db->field_exists('created_at', 'applications')) {
-            $application_data['created_at'] = $ts;
-        }
         $application_id = $this->candidate_model->create_application($application_data);
 
         $this->db->trans_complete();

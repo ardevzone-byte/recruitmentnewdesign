@@ -25,19 +25,20 @@
       <div class="alert alert-danger mb-3"><?= html_escape($error) ?></div>
     <?php endif; ?>
 
-    <div class="emp-table-card mb-3">
+    <div class="emp-table-card mb-3 ce2-search-card">
       <div class="emp-table-card__head candidate-evaluations2-page__card-head-light">
         <h5 class="mb-0"><i class="bi bi-search me-2"></i> بحث باسم المرشح</h5>
       </div>
       <div class="emp-table-card__body p-3 p-md-4">
-      <form method="post" action="<?= base_url('CandidateEvaluations2/search'); ?>" class="row g-3 align-items-end">
-        <div class="col-lg-9">
-          <label class="form-label fw-semibold">الاسم</label>
-          <input type="text" name="q" value="<?= html_escape($q ?? '') ?>" class="form-control" placeholder="اكتب اسم المرشح...">
-          <div class="candidate-evaluations2-page__hint mt-2">سيتم عرض قائمة مرشحين؛ اختر المرشح لعرض الطلبات والتقييمات.</div>
+      <form method="post" action="<?= base_url('CandidateEvaluations2/search'); ?>" class="row g-3 align-items-start ce2-search-form">
+        <div class="col-lg-8">
+          <label class="form-label ce2-search-label">الاسم</label>
+          <input type="text" name="q" value="<?= html_escape($q ?? '') ?>" class="form-control ce2-search-input" placeholder="اكتب اسم المرشح...">
+          <p class="candidate-evaluations2-page__hint mt-3 mb-0" role="note">سيتم عرض قائمة مرشحين؛ اختر المرشح لعرض الطلبات والتقييمات.</p>
         </div>
-        <div class="col-lg-3 d-grid">
-          <button class="button default orange small justify-content-center" type="submit"><i class="bi bi-search me-1"></i> بحث</button>
+        <div class="col-lg-4 d-grid align-self-lg-end">
+          <label class="form-label ce2-search-label opacity-0 user-select-none d-none d-lg-block">بحث</label>
+          <button class="button default orange small justify-content-center py-2" type="submit"><i class="bi bi-search me-1"></i> بحث</button>
         </div>
       </form>
       </div>

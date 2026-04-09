@@ -23,37 +23,31 @@ class Requisitions extends CI_Controller
     {
         $data["title"] = "طلباتي الوظيفية";
 
+        // Get current user ID
         $user_id = $this->session->userdata("user_id");
-        $username = $this->session->userdata("username");
 
-        $data["my_requests"] = $this->requisition_model->get_requisitions_by_user($user_id, $username);
+        // Get all requests created by this user
+        $data["my_requests"] = $this->requisition_model->get_requisitions_by_user($user_id);
 
-        $this->config->load("demo_data", true);
-        if (empty($data["my_requests"])) {
-            $data["my_requests"] = $this->config->item("demo_my_requests", "demo_data");
-            $data["is_demo_mode"] = true;
-        } else {
-            $data["is_demo_mode"] = false;
-        }
-
+        // Get job postings for each request to show status
         foreach ($data["my_requests"] as &$request) {
             // Check if this requisition has been published as a job
-            if (empty($data["is_demo_mode"])) {
-                $request["job_posting"] = $this->job_model->get_job_by_requisition_id($request["id"]);
-            }
+            $request["job_posting"] = $this->job_model->get_job_by_requisition_id($request["id"]);
 
+            // Count applications for this job (if published)
             if ($request["job_posting"]) {
                 $request["application_count"] = $this->requisition_model->get_application_count(
                     $request["job_posting"]["id"],
                 );
             } else {
-                $request["application_count"] = $request["application_count"] ?? 0;
+                $request["application_count"] = 0;
             }
 
-            if (empty($data["is_demo_mode"])) {
-                $request["interview_count"] = $this->requisition_model->get_interview_count_by_requisition($request["id"]);
-                $request["offer_count"] = $this->requisition_model->get_offer_count_by_requisition($request["id"]);
-            }
+            // Get interview count for this requisition
+            $request["interview_count"] = $this->requisition_model->get_interview_count_by_requisition($request["id"]);
+
+            // Get offer count for this requisition
+            $request["offer_count"] = $this->requisition_model->get_offer_count_by_requisition($request["id"]);
         }
 
         // Load views
@@ -420,20 +414,6 @@ class Requisitions extends CI_Controller
             $data["requests"] = $this->requisition_model->get_requisitions_by_status("بانتظار مدير التوظيف");
         } elseif ($user_role == "ceo") {
             $data["requests"] = $this->requisition_model->get_requisitions_by_status("بانتظار الرئيس التنفيذي");
-        }
-
-        $this->config->load("demo_data", true);
-        if (empty($data["requests"]) && in_array($user_role, ["recruitment_manager", "ceo"])) {
-            $status = ($user_role == "recruitment_manager") ? "بانتظار مدير التوظيف" : "بانتظار الرئيس التنفيذي";
-            $demo_req = $this->config->item("demo_approval_requests", "demo_data");
-            foreach ($demo_req as &$row) {
-                $row["status"] = $status;
-            }
-            unset($row);
-            $data["requests"] = $demo_req;
-            $data["approvals_demo_mode"] = true;
-        } else {
-            $data["approvals_demo_mode"] = false;
         }
 
         // 3. Logic for Job Offers (For HR Manager 2230)

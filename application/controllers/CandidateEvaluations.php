@@ -19,7 +19,9 @@ class CandidateEvaluations extends CI_Controller
             'evals'  => [],
             'error'  => null,
         ];
+        $this->load->view('template/new_header', $data);
         $this->load->view('candidates/candidate_evaluations', $data);
+        $this->load->view('template/new_footer');
     }
 
     public function search()
@@ -36,14 +38,20 @@ class CandidateEvaluations extends CI_Controller
 
         if ($q === '') {
             $data['error'] = 'فضلاً أدخل الرقم الوظيفي أو اسم المرشح.';
-            return $this->load->view('candidates/candidate_evaluations', $data);
+            $this->load->view('template/new_header', $data);
+            $this->load->view('candidates/candidate_evaluations', $data);
+            $this->load->view('template/new_footer');
+            return;
         }
 
         // يرجع المرشح + بيانات العرض + application_id
         $result = $this->cem->find_candidate_offer_by_employee_or_name($q);
         if (!$result) {
             $data['error'] = 'لم يتم العثور على مرشح/عرض مطابق لبحثك.';
-            return $this->load->view('candidates/candidate_evaluations', $data);
+            $this->load->view('template/new_header', $data);
+            $this->load->view('candidates/candidate_evaluations', $data);
+            $this->load->view('template/new_footer');
+            return;
         }
 
         $data['result'] = $result;
@@ -52,7 +60,9 @@ class CandidateEvaluations extends CI_Controller
         $application_id = (int)$result->application_id;
         $data['evals'] = $application_id ? $this->cem->get_evaluations_by_application($application_id) : [];
 
+        $this->load->view('template/new_header', $data);
         $this->load->view('candidates/candidate_evaluations', $data);
+        $this->load->view('template/new_footer');
     }
 
     public function create()

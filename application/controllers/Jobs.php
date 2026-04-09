@@ -56,42 +56,8 @@ class Jobs extends CI_Controller
         $data["pending_requests"] = $this->job_model->get_approved_requisitions_without_job_post();
         $data["published_jobs"] = $this->job_model->get_published_jobs();
 
-        $this->config->load("demo_data", true);
-        if (empty($data["published_jobs"])) {
-            $data["published_jobs"] = $this->config->item("demo_published_jobs", "demo_data");
-            $data["is_demo_mode"] = true;
-        } else {
-            $data["is_demo_mode"] = false;
-        }
-
-        // Add applicant counts for each published job
-        foreach ($data["published_jobs"] as &$job) {
-            if (empty($job["applicant_counts"]) && !empty($job["id"])) {
-                $job["applicant_counts"] = $this->job_model->get_applicant_counts_by_job($job["id"]);
-            }
-        }
-        unset($job);
-
         $this->load->view("template/new_header", $data);
         $this->load->view("jobs/job_dashboard", $data);
-        $this->load->view("template/new_footer");
-    }
-
-    /**
-     * Internal job details page (with header & sidebar).
-     */
-    public function view($job_id)
-    {
-        $data["job"] = $this->job_model->get_job_by_id($job_id);
-
-        if (empty($data["job"])) {
-            show_404();
-        }
-
-        $data["title"] = "تفاصيل الوظيفة: " . $data["job"]["job_title"];
-
-        $this->load->view("template/new_header", $data);
-        $this->load->view("jobs/view", $data);
         $this->load->view("template/new_footer");
     }
 
@@ -143,16 +109,16 @@ class Jobs extends CI_Controller
                 $success_msg =
                     '
                 <div class="alert alert-success">
-                    <h5><i class="bi bi-check-circle me-2"></i> تم نشر الإعلان الوظيفي بنجاح!</h5>
+                    <h5><i class="fas fa-check-circle"></i> تم نشر الإعلان الوظيفي بنجاح!</h5>
                     
                     <div class="mt-3">
                         <strong>رابط التقديم السريع (للنشر على LinkedIn):</strong><br>
                         <div class="input-group mt-1">
-                            <input type="text" class="form-control custom-input" id="publicLink" value="' .
+                            <input type="text" class="form-control" id="publicLink" value="' .
                     $public_url .
                     '" readonly>
-                            <button class="button hex-btn white small" type="button" onclick="copyToClipboard(\'publicLink\')">
-                                <i class="bi bi-clipboard me-1"></i> نسخ
+                            <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard(\'publicLink\')">
+                                <i class="fas fa-copy"></i> نسخ
                             </button>
                         </div>
                         <small class="text-muted">هذا الرابط يفتح نموذج التقديم المبسط (الاسم، الجوال، السيرة الذاتية فقط).</small>

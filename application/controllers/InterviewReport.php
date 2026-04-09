@@ -8,40 +8,21 @@ class InterviewReport extends CI_Controller
         $this->load->model('Interview_report_model', 'irm');
         $this->load->helper(['url', 'form', 'security', 'download']);
         $this->load->library(['session']);
-
-        if (!$this->session->userdata('logged_in')) {
-            redirect('users/login');
-        }
     }
 
     public function index()
     {
         $filters = $this->_filters_from_request();
 
-        $data = [
-            'title' => 'تقرير المقابلات الوظيفية',
-            'filters' => $filters,
-            'rows' => [],
-            'summary' => [
-                'total_candidates' => 0,
-                'with_application' => 0,
-                'overall_completed' => 0,
-                'overall_pending' => 0,
-                'total_evals' => 0,
-            ],
-            'recruiter_stats' => [],
-            'app_status_counts' => [],
-            'db_error' => null,
-        ];
+         $data = [
+  'title' => 'تقرير المقابلات الوظيفية',
+  'filters' => $filters,
+  'rows' => $this->irm->get_report_rows($filters),
+  'summary' => $this->irm->get_summary($filters),
+  'recruiter_stats' => $this->irm->get_recruiter_stats($filters),
+  'app_status_counts' => $this->irm->get_application_status_counts($filters),
+];
 
-        try {
-            $data['rows'] = $this->irm->get_report_rows($filters);
-            $data['summary'] = $this->irm->get_summary($filters);
-            $data['recruiter_stats'] = $this->irm->get_recruiter_stats($filters);
-            $data['app_status_counts'] = $this->irm->get_application_status_counts($filters);
-        } catch (Throwable $e) {
-            $data['db_error'] = 'تعذر تحميل التقرير. تحقق من الاتصال بقاعدة البيانات أو من وجود الجداول المطلوبة.';
-        }
 
         $this->load->view('template/new_header', $data);
         $this->load->view('recruitment/interview_report', $data);

@@ -53,20 +53,9 @@ class Dashboard extends CI_Controller
 
         $data["stats"] = $stats;
 
-        // Chart data for dashboard
-        $data["chart_kpi"] = ['total_apps' => 0, 'interviewed' => 0, 'offered' => 0, 'hired' => 0];
-        try {
-            $this->load->model("report_model");
-            if ($this->db->table_exists('applications')) {
-                $data["chart_kpi"] = $this->report_model->get_kpi_stats([]);
-            }
-        } catch (Exception $e) {
-            log_message('error', 'Dashboard chart_kpi: ' . $e->getMessage());
-        }
-
         $this->load->view("template/new_header", $data);
         $this->load->view("dashboard/main", $data);
-        $this->load->view("template/new_footer", $data);
+        $this->load->view("template/new_footer");
     }
 
     /**

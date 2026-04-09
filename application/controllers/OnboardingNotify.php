@@ -7,24 +7,18 @@ class OnboardingNotify extends CI_Controller
         parent::__construct();
         $this->load->model('Onboarding_model1');
         $this->load->helper(['url','security']);
-        $this->load->library('session');
-        if (!$this->session->userdata('logged_in')) {
-            redirect('users/login');
-        }
     }
 
     public function index()
     {
-        $data['title']         = 'إشعار مباشرة الموظف';
-        $data['depts']         = $this->Onboarding_model1->dept_all();
-        $data['active_depts']  = $this->Onboarding_model1->dept_active();
-        $data['logs']          = $this->Onboarding_model1->logs_latest(30);
-        $data['embed_shell']   = true;
-        $data['extra_css']     = 'https://unpkg.com/aos@2.3.1/dist/aos.css';
+        $data['title']  = 'إشعار مباشرة الموظف';
+        $data['depts']  = $this->Onboarding_model1->dept_all();
+        $data['active_depts'] = $this->Onboarding_model1->dept_active();
+        $data['logs']   = $this->Onboarding_model1->logs_latest(30);
 
         $this->load->view('template/new_header', $data);
         $this->load->view('onboarding/notify_dashboard', $data);
-        $this->load->view('template/new_footer', $data);
+        $this->load->view('template/new_footer');
     }
 
     // ✅ Ajax: بحث ذكي بالقائمة المنسدلة

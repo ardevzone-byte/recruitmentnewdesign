@@ -8,17 +8,6 @@ class CandidateAttachments extends CI_Controller
         $this->load->model('Candidate_attachments_model', 'cam');
         $this->load->helper(['url', 'form', 'security']);
         $this->load->library(['session', 'upload']);
-
-        if (!$this->session->userdata('logged_in')) {
-            redirect('users/login');
-        }
-    }
-
-    private function _render(array $data)
-    {
-        $this->load->view('template/new_header', $data);
-        $this->load->view('candidates/candidate_attachments', $data);
-        $this->load->view('template/new_footer', $data);
     }
 
     public function index()
@@ -32,7 +21,9 @@ class CandidateAttachments extends CI_Controller
             'file_cols' => $this->_file_columns()
         ];
 
-        $this->_render($data);
+        $this->load->view('template/new_header', $data);
+        $this->load->view('candidates/candidate_attachments', $data);
+        $this->load->view('template/new_footer');
     }
 
 
@@ -51,18 +42,26 @@ class CandidateAttachments extends CI_Controller
 
     if ($q === '') {
         $data['error'] = 'فضلاً أدخل الرقم الوظيفي أو اسم المرشح.';
-        return $this->_render($data);
+        $this->load->view('template/new_header', $data);
+        $this->load->view('candidates/candidate_attachments', $data);
+        $this->load->view('template/new_footer');
+        return;
     }
 
     $result = $this->cam->find_candidate_by_employee_or_name($q);
 
     if (!$result) {
         $data['error'] = 'لم يتم العثور على مرشح مطابق لبحثك.';
-        return $this->_render($data);
+        $this->load->view('template/new_header', $data);
+        $this->load->view('candidates/candidate_attachments', $data);
+        $this->load->view('template/new_footer');
+        return;
     }
 
     $data['result'] = $result;
-    $this->_render($data);
+    $this->load->view('template/new_header', $data);
+    $this->load->view('candidates/candidate_attachments', $data);
+    $this->load->view('template/new_footer');
 }
 
 public function upload()

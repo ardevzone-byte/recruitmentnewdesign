@@ -6,16 +6,19 @@ class Reports extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('report_model');
-        $this->load->model('candidate_model');
+        $this->load->model('candidate_model'); // For job list
         $this->load->library('session');
         $this->load->helper(['url', 'form']);
 
-        if (!$this->session->userdata('logged_in')) {
-            redirect('users/login');
-            return;
+        // Permissions: Only RM (1291), CEO, or Admin
+        $user_id = $this->session->userdata('username');
+        $role = $this->session->userdata('role');
+        
+        $allowed_users = ['1291', '1526', 'admin'];
+        if (!in_array($user_id, $allowed_users) && $role != 'recruitment_manager' && $role != 'ceo') {
+            $this->session->set_flashdata('error_msg', 'Access Denied');
+            redirect('dashboard');
         }
-
-        // Allow all logged-in users to view reports
     }
     public function ceo_report() {
         // Security Check (Only CEO 1001 or Admin)
@@ -35,7 +38,7 @@ class Reports extends CI_Controller {
 
         $this->load->view('template/new_header', $data);
         $this->load->view('reports/ceo_team_report', $data);
-        $this->load->view('template/new_footer', $data);
+        $this->load->view('template/new_footer');
     }
 // Fetch details for KPI modal
    // جلب التفاصيل للمودال عبر AJAX
@@ -94,29 +97,25 @@ class Reports extends CI_Controller {
     }
     public function index() {
         $filters = $this->input->get();
+
         $data['title'] = 'لوحة التقارير والتحليلات';
+        
+        // 1. Lists & KPIs
+        $data['recruitment_team'] = $this->report_model->get_recruitment_team_list();
+        $data['jobs_list'] = $this->candidate_model->get_active_jobs(); // Ensure this model is loaded
+        $data['kpi'] = $this->report_model->get_kpi_stats($filters);
+        
+        // 2. Charts
+        $data['status_chart'] = $this->report_model->get_applications_by_status($filters);
+        $data['trend_chart'] = $this->report_model->get_monthly_trend();
+        
+        // 3. Performance (Fixed Count Logic)
+        $data['recruiters'] = $this->report_model->get_recruiter_performance($filters);
+
+        // 4. NEW: Job Offers Report
+        $data['offers_report'] = $this->report_model->get_job_offers_report($filters);
+
         $data['filters'] = $filters;
-
-        // Safe defaults when DB tables are missing or columns differ
-        $data['recruitment_team'] = [];
-        $data['jobs_list'] = [];
-        $data['kpi'] = ['total_apps' => 0, 'interviewed' => 0, 'offered' => 0, 'hired' => 0];
-        $data['status_chart'] = [];
-        $data['trend_chart'] = [];
-        $data['recruiters'] = [];
-        $data['offers_report'] = [];
-
-        try {
-            $data['recruitment_team'] = $this->report_model->get_recruitment_team_list();
-            $data['jobs_list'] = $this->candidate_model->get_active_jobs();
-            $data['kpi'] = $this->report_model->get_kpi_stats($filters);
-            $data['status_chart'] = $this->report_model->get_applications_by_status($filters);
-            $data['trend_chart'] = $this->report_model->get_monthly_trend();
-            $data['recruiters'] = $this->report_model->get_recruiter_performance($filters);
-            $data['offers_report'] = $this->report_model->get_job_offers_report($filters);
-        } catch (Exception $e) {
-            log_message('error', 'Reports index: ' . $e->getMessage());
-        }
 
         $this->load->view('template/new_header', $data);
         $this->load->view('reports/dashboard', $data);

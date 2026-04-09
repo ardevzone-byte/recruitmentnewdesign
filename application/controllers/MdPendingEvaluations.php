@@ -8,9 +8,6 @@ class MdPendingEvaluations extends CI_Controller
         $this->load->model('Md_pending_evaluations_model', 'mdm');
         $this->load->helper(['url', 'form', 'security', 'download']);
         $this->load->library(['session']);
-        if (!$this->session->userdata('logged_in')) {
-            redirect('users/login');
-        }
     }
 
     public function index()
@@ -27,14 +24,11 @@ class MdPendingEvaluations extends CI_Controller
             'filters' => $filters,
             'rows'    => $this->mdm->get_pending_rows($filters),
             'summary' => $this->mdm->get_summary($filters),
-            'extra_css' => 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css',
-            'extra_js'  => 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js',
-            'after_js_view' => 'recruitment/md_pending_evaluations_scripts',
         ];
 
         $this->load->view('template/new_header', $data);
         $this->load->view('recruitment/md_pending_evaluations', $data);
-        $this->load->view('template/new_footer', $data);
+        $this->load->view('template/new_footer');
     }
 
     // تصدير CSV يفتح في Excel

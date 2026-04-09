@@ -2662,51 +2662,29 @@ $data['cuntt_emp_candidate1sultanall5553']=$this->user_model->cuntt_emp_candidat
                     if ($this ->session->userdata('type') == 1) {
                         $data['user'] = $this->user_model->get_customersid6();
 
-                      $data['customers'] = $this->user_model->get_emp_candidate_list_first_stage();
+                      $data['customers'] = $this->user_model->get_emp_candidate_admin1025555555();
                       
                     }elseif ($this ->session->userdata('type') == 3) {
 
 
                       $data['user'] = $this->user_model->get_customersid6();
 
-                      $data['customers'] = $this->user_model->get_emp_candidate_list_first_stage();
+                      $data['customers'] = $this->user_model->get_emp_candidate_admin1025555555();
 
                       
                     }elseif ($this ->session->userdata('type') == 4) {
                       $data['user'] = $this->user_model->get_customersid6();
 
-                      $data['customers'] = $this->user_model->get_emp_candidate_list_first_stage();
+                      $data['customers'] = $this->user_model->get_emp_candidate_admin1025555555();
                     }elseif ($this ->session->userdata('type') == 2) {
                       $data['user'] = $this->user_model->get_customersid6();
 
-                      $data['customers'] = $this->user_model->get_emp_candidate_list_first_stage();
+                      $data['customers'] = $this->user_model->get_emp_candidate_admin1025555555();
                     }elseif ($this ->session->userdata('type') == 7) {
-                      $data['customers'] = $this->user_model->get_emp_candidate_list_first_stage();
-                    }
-          $data['title'] = 'مرشحي التوظيف — المرحلة الأولى';
-          $data['extra_css'] = [
-            'assets/vendor/jquery-datatable/dataTables.bootstrap4.min.css',
-            'assets/vendor/jquery-datatable/fixedeader/dataTables.fixedcolumns.bootstrap4.min.css',
-            'assets/vendor/jquery-datatable/fixedeader/dataTables.fixedheader.bootstrap4.min.css',
-            'assets/vendor/sweetalert/sweetalert.css',
-          ];
-          $data['extra_js'] = [
-            'assets/bundles/libscripts.bundle.js',
-            'assets/bundles/vendorscripts.bundle.js',
-            'assets/bundles/datatablescripts.bundle.js',
-            'assets/vendor/jquery-datatable/buttons/dataTables.buttons.min.js',
-            'assets/vendor/jquery-datatable/buttons/buttons.bootstrap4.min.js',
-            'assets/vendor/jquery-datatable/buttons/buttons.colVis.min.js',
-            'assets/vendor/jquery-datatable/buttons/buttons.html5.min.js',
-            'assets/vendor/jquery-datatable/buttons/buttons.print.min.js',
-            'assets/vendor/sweetalert/sweetalert.min.js',
-            'assets/bundles/mainscripts.bundle.js',
-            'assets/js/pages/tables/jquery-datatable.js',
-          ];
-          $data['after_js_view'] = 'templateo/data_emp_part_new_jobs10_done_scripts';
-          $this->load->view('template/new_header', $data);
+                      $data['customers'] = $this->user_model->get_emp_candidate_admin1025555555();
+                    } 
+          $this->load->view('templateo/header');    
           $this->load->view('templateo/data_emp_part_new_jobs', $data);
-          $this->load->view('template/new_footer', $data);
       }
     }
 
@@ -2973,48 +2951,37 @@ $data['cuntt_emp_candidate1sultanall5553']=$this->user_model->cuntt_emp_candidat
                     if ($this ->session->userdata('type') == 1) {
                         $data['user'] = $this->user_model->get_customersid6();
 
-                      $data['customers'] = $this->user_model->get_emp_candidate_list_approved_stage();
+                      $data['customers'] = $this->user_model->get_emp_candidate_admin1025555555();
                       
                     }elseif ($this ->session->userdata('type') == 3) {
 
 
                       $data['user'] = $this->user_model->get_customersid6();
 
-                      $data['customers'] = $this->user_model->get_emp_candidate_list_approved_stage();
+                      $data['customers'] = $this->user_model->get_emp_candidate_admin102555555510_done();
 
                       
                     }elseif ($this ->session->userdata('type') == 4) {
                       $data['user'] = $this->user_model->get_customersid6();
 
-                      $data['customers'] = $this->user_model->get_emp_candidate_list_approved_stage();
+                      $data['customers'] = $this->user_model->get_emp_candidate_admin1025555555();
                     }elseif ($this ->session->userdata('type') == 2) {
                       $data['user'] = $this->user_model->get_customersid6();
 
-                      $data['customers'] = $this->user_model->get_emp_candidate_list_approved_stage();
+                      $data['customers'] = $this->user_model->get_emp_candidate_admin1025555555();
                     }elseif ($this ->session->userdata('type') == 7) {
-                      $data['customers'] = $this->user_model->get_emp_candidate_list_approved_stage();
+                      $data['user'] = $this->user_model->get_customersid6();
+                      $data['customers'] = $this->user_model->get_emp_candidate_admin102555555510_done();
                     }
-          $data['title'] = 'معتمد من قبل رئيس اللجنة';
+          $data['title'] = 'المرشحين المعتمدين';
           $data['extra_css'] = [
-            'assets/vendor/jquery-datatable/dataTables.bootstrap4.min.css',
-            'assets/vendor/jquery-datatable/fixedeader/dataTables.fixedcolumns.bootstrap4.min.css',
-            'assets/vendor/jquery-datatable/fixedeader/dataTables.fixedheader.bootstrap4.min.css',
-            'assets/vendor/sweetalert/sweetalert.css',
+              'https://cdn.datatables.net/1.13.8/css/dataTables.bootstrap5.min.css',
           ];
           $data['extra_js'] = [
-            'assets/bundles/libscripts.bundle.js',
-            'assets/bundles/vendorscripts.bundle.js',
-            'assets/bundles/datatablescripts.bundle.js',
-            'assets/vendor/jquery-datatable/buttons/dataTables.buttons.min.js',
-            'assets/vendor/jquery-datatable/buttons/buttons.bootstrap4.min.js',
-            'assets/vendor/jquery-datatable/buttons/buttons.colVis.min.js',
-            'assets/vendor/jquery-datatable/buttons/buttons.html5.min.js',
-            'assets/vendor/jquery-datatable/buttons/buttons.print.min.js',
-            'assets/vendor/sweetalert/sweetalert.min.js',
-            'assets/bundles/mainscripts.bundle.js',
-            'assets/js/pages/tables/jquery-datatable.js',
+              'https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js',
+              'https://cdn.datatables.net/1.13.8/js/dataTables.bootstrap5.min.js',
           ];
-          $data['after_js_view'] = 'templateo/data_emp_part_new_jobs10_done_scripts';
+          $data['after_js_view'] = 'includes/datatables-basic-init';
           $this->load->view('template/new_header', $data);
           $this->load->view('templateo/data_emp_part_new_jobs10_done', $data);
           $this->load->view('template/new_footer', $data);
@@ -3115,11 +3082,19 @@ $data['cuntt_emp_candidate1sultanall5553']=$this->user_model->cuntt_emp_candidat
             $data['id'] = $this->uri->segment(3,0);
             $id = $data['id']; 
             $data['customers'] = $this->user_model->get_emp_candidate_admin102555555510_done225($id);
-
-
-                   
-          $this->load->view('templateo/header');    
-          $this->load->view('templateo/data_emp_part_new_jobs10_done', $data);
+            $data['user'] = $this->user_model->get_customersid6();
+            $data['title'] = 'المرشحين المعتمدين';
+            $data['extra_css'] = [
+                'https://cdn.datatables.net/1.13.8/css/dataTables.bootstrap5.min.css',
+            ];
+            $data['extra_js'] = [
+                'https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js',
+                'https://cdn.datatables.net/1.13.8/js/dataTables.bootstrap5.min.js',
+            ];
+            $data['after_js_view'] = 'includes/datatables-basic-init';
+            $this->load->view('template/new_header', $data);
+            $this->load->view('templateo/data_emp_part_new_jobs10_done', $data);
+            $this->load->view('template/new_footer', $data);
       }
     }
 
@@ -7767,30 +7742,18 @@ $id=$this->input->post('n3');
 
 
     public function logout(){
-      $name = $this->session->userdata('name');
-      $id = $this->session->userdata('user_id2');
-
       // Unset user data
       $this->session->unset_userdata('logged_in');
       $this->session->unset_userdata('user_id');
       $this->session->unset_userdata('username');
-      $this->session->unset_userdata('name');
-      $this->session->unset_userdata('user_id2');
-
+       
+      // Set message
       $this->session->set_flashdata('user_loggedout', 'You are now logged out');
-
-      // Optional logging - do not break logout if DB tables/columns are missing
-      $db_debug = $this->db->db_debug;
-      $this->db->db_debug = false;
-      try {
-        if (!empty($id)) {
-          $this->user_model->user_update_conect_out($id);
-        }
-        if (!empty($name)) {
-          $this->user_model->add_watch($name, 'خروج من النظام');
-        }
-      } catch (Exception $e) { /* ignore */ }
-      $this->db->db_debug = $db_debug;
+      $name=$this->session->userdata('name');
+      $id=$this->session->userdata('user_id2');
+      $op_name="خروج من النظام";
+       $this->user_model->user_update_conect_out($id);
+      $this->user_model->add_watch($name,$op_name);    
 
       redirect('users/login');
     }

@@ -9,29 +9,17 @@ class SmsPlatform extends CI_Controller
         $this->load->helper(['url', 'form', 'security', 'file']);
         $this->load->library(['session', 'upload']);
         $this->config->load('sms', true);
-
-        if (!$this->session->userdata('logged_in')) {
-            redirect('users/login');
-        }
-    }
-
-    /** @return array<int, string> */
-    private function sms_regions(): array
-    {
-        $r = $this->config->item('sms_regions', 'sms');
-        return is_array($r) ? $r : [];
     }
 
     public function index()
     {
         $data = [
-            'title'    => 'منصة إرسال الرسائل النصية',
-            'regions'  => $this->sms_regions(),
-            'extra_js' => 'newassets/js/sms-platform.js',
+            'title'   => 'منصة إرسال الرسائل النصية',
+            'regions' => ['الرياض','ابها','الخبر','حائل'],
         ];
         $this->load->view('template/new_header', $data);
         $this->load->view('sms_platform/index', $data);
-        $this->load->view('template/new_footer', $data);
+        $this->load->view('template/new_footer');
     }
 
     /**
@@ -45,7 +33,7 @@ class SmsPlatform extends CI_Controller
         $message        = trim((string)$this->input->post('message_body', true));
         $manual_numbers = (string)$this->input->post('mobile_numbers', true);
 
-        $regions_allowed = $this->sms_regions();
+        $regions_allowed = ['الرياض','ابها','الخبر','حائل'];
         if (!in_array($region, $regions_allowed, true)) {
             $this->session->set_flashdata('error_msg', 'المنطقة غير صحيحة');
             redirect('SmsPlatform');
@@ -104,7 +92,7 @@ class SmsPlatform extends CI_Controller
         $lastResp = null;
 
         foreach ($mobiles as $mobile) {
-            $resp = $this->smsm->send_sms_oursms($mobile, $message);
+            $resp = $this->send_sms_oursms($mobile, $message);
             $lastResp = $resp['raw'] ?? ($resp['error'] ?? null);
 
             if (!empty($resp['ok'])) {
@@ -144,7 +132,7 @@ class SmsPlatform extends CI_Controller
 
         $data = [
             'title'    => 'تقارير الرسائل النصية',
-            'regions'  => $this->sms_regions(),
+            'regions'  => ['الرياض','ابها','الخبر','حائل'],
             'filters'  => $filters,
             'stats'    => $this->smsm->stats_by_region($filters),
             'campaigns'=> $this->smsm->get_campaigns($filters),
@@ -152,7 +140,7 @@ class SmsPlatform extends CI_Controller
 
         $this->load->view('template/new_header', $data);
         $this->load->view('sms_platform/dashboard', $data);
-        $this->load->view('template/new_footer', $data);
+        $this->load->view('template/new_footer');
     }
 
     public function details($id)
@@ -168,7 +156,7 @@ class SmsPlatform extends CI_Controller
         ];
         $this->load->view('template/new_header', $data);
         $this->load->view('sms_platform/details', $data);
-        $this->load->view('template/new_footer', $data);
+        $this->load->view('template/new_footer');
     }
 
     /**
@@ -391,5 +379,126 @@ class SmsPlatform extends CI_Controller
 
         @unlink($path);
         return [];
+    }
+
+    /**
+     * إرسال oursms (POST) + يعتبر النجاح من accepted/rejected
+     */
+    private function send_sms_oursms($mobile, $message)
+    {
+        $apiUrl   = 'https://api.oursms.com/api-a/msgs';
+        $username = 'marsoom';
+        $token    = 'zcTlmZcAI8JLK2Qsb2bs';
+        $src      = 'MARSOOM';
+
+        $mobile = preg_replace('/\D+/', '', (string)$mobile);
+
+        if (!preg_match('/^9665\d{8}$/', $mobile)) {
+            return [
+                'ok' => false,
+                'http_code' => null,
+                'raw' => null,
+                'error' => 'رقم الجوال غير صحيح: يجب أن يكون بصيغة 9665 ثم 8 أرقام',
+                'accepted' => 0,
+                'rejected' => 1,
+            ];
+        }
+
+        $postFields = http_build_query([
+            'username' => $username,
+            'token'    => $token,
+            'src'      => $src,
+            'dests'    => $mobile,
+            'body'     => $message
+        ]);
+
+        $ch = curl_init();
+        curl_setopt_array($ch, [
+            CURLOPT_URL => $apiUrl,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => $postFields,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_CONNECTTIMEOUT => 10,
+        ]);
+
+        $response = curl_exec($ch);
+        $curlErr  = curl_error($ch);
+        $httpCode = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        if ($response === false) {
+            return [
+                'ok' => false,
+                'http_code' => $httpCode,
+                'raw' => null,
+                'error' => 'cURL Error: ' . $curlErr,
+                'accepted' => 0,
+                'rejected' => 1,
+            ];
+        }
+
+        $json = json_decode($response, true);
+
+        if (json_last_error() === JSON_ERROR_NONE && is_array($json)) {
+            $accepted = isset($json['accepted']) ? (int)$json['accepted'] : 0;
+            $rejected = isset($json['rejected']) ? (int)$json['rejected'] : 0;
+
+            if ($accepted > 0) {
+                return [
+                    'ok' => true,
+                    'http_code' => $httpCode,
+                    'raw' => $response,
+                    'error' => null,
+                    'accepted' => $accepted,
+                    'rejected' => $rejected,
+                    'jobId' => $json['jobId'] ?? null,
+                ];
+            }
+
+            $errMsg = 'فشل الإرسال (accepted=0)';
+            if (!empty($json['rejectedMsgs'])) {
+                $errMsg = is_array($json['rejectedMsgs'])
+                    ? json_encode($json['rejectedMsgs'], JSON_UNESCAPED_UNICODE)
+                    : (string)$json['rejectedMsgs'];
+            } elseif (!empty($json['statusDesc'])) {
+                $errMsg = (string)$json['statusDesc'];
+            } elseif (!empty($json['message'])) {
+                $errMsg = (string)$json['message'];
+            }
+
+            return [
+                'ok' => false,
+                'http_code' => $httpCode,
+                'raw' => $response,
+                'error' => $errMsg,
+                'accepted' => $accepted,
+                'rejected' => $rejected,
+                'jobId' => $json['jobId'] ?? null,
+            ];
+        }
+
+        if ($httpCode === 200) {
+            return [
+                'ok' => true,
+                'http_code' => $httpCode,
+                'raw' => $response,
+                'error' => null,
+                'accepted' => 1,
+                'rejected' => 0,
+            ];
+        }
+
+        return [
+            'ok' => false,
+            'http_code' => $httpCode,
+            'raw' => $response,
+            'error' => 'HTTP Error: ' . $httpCode,
+            'accepted' => 0,
+            'rejected' => 1,
+        ];
     }
 }

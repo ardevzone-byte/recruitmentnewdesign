@@ -19,8 +19,11 @@ class Candidates_regions_report extends CI_Controller
         $this->load->helper(['url', 'form', 'security']);
         $this->load->library(['session']);
 
-        if (!$this->session->userdata('logged_in')) {
-            redirect('users/login');
+        // ✅ صلاحية (عدّلها حسب نظامكم)
+        // مثال: فقط recruitment_manager و ceo أو مستخدمين محددين
+        $allowed_roles = ['recruitment_manager', 'ceo'];
+        if (!in_array((string)$this->session->userdata('role'), $allowed_roles)) {
+            show_error('لا تملك صلاحية الوصول لهذه الصفحة', 403);
         }
     }
 
@@ -42,27 +45,21 @@ class Candidates_regions_report extends CI_Controller
         $data['title'] = 'تقرير المرشحين حسب المناطق';
         $data['filters'] = $filters;
         $data['allowed_locations'] = $this->allowed_locations;
-        $data['stats_by_location'] = [];
-        $data['stats_by_nationality'] = [];
-        $data['stats_by_company'] = [];
-        $data['allowed_companies'] = $this->allowed_companies;
-        $data['rows'] = [];
-        $data['total'] = 0;
-        $data['db_error'] = null;
 
-        try {
-            $data['stats_by_location'] = $this->crm->stats_by_location($filters);
-            $data['stats_by_nationality'] = $this->crm->stats_top_nationalities($filters, 8);
-            $data['stats_by_company'] = $this->crm->stats_top_companies($filters, 8);
-            $data['rows'] = $this->crm->get_candidates($filters, 500);
-            $data['total'] = $this->crm->count_candidates($filters);
-        } catch (Throwable $e) {
-            $data['db_error'] = 'تعذر تحميل التقرير. تحقق من الاتصال بقاعدة البيانات أو من وجود الجداول المطلوبة.';
-        }
+        // ✅ الإحصائيات (داشبورد)
+        $data['stats_by_location'] = $this->crm->stats_by_location($filters);
+        $data['stats_by_nationality'] = $this->crm->stats_top_nationalities($filters, 8);
+        $data['stats_by_company'] = $this->crm->stats_top_companies($filters, 8);
+        $data['allowed_companies'] = $this->allowed_companies;
+
+
+        // ✅ القائمة التفصيلية
+        $data['rows'] = $this->crm->get_candidates($filters, 500); // حد أعلى للعرض (غيّره)
+        $data['total'] = $this->crm->count_candidates($filters);
 
         $this->load->view('template/new_header', $data);
         $this->load->view('candidates/regions_report', $data);
-        $this->load->view('template/new_footer', $data);
+        $this->load->view('template/new_footer');
     }
 
     public function update($id)

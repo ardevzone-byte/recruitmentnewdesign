@@ -7,8 +7,8 @@ class JobDescription extends CI_Controller
         parent::__construct();
 
         // عدّلها حسب نظامك
-        if (!$this->session->userdata('logged_in')) {
-            redirect('users/login');
+        if (!$this->session->userdata('username')) {
+            redirect('login');
         }
 
         $this->load->model('Job_description_model', 'jd');
@@ -18,7 +18,9 @@ class JobDescription extends CI_Controller
 
  public function index()
 {
-    $data['rows']  = $this->jd->get_list_all();
+    $this->load->model('Job_description_model');
+
+    $data['rows']  = $this->Job_description_model->get_list_all();
     $data['title'] = 'الوصف الوظيفي';
 
     $this->load->view('template/new_header', $data);
@@ -248,10 +250,10 @@ class JobDescription extends CI_Controller
     public function print_view($id)
 {
     $id = (int)$id;
-    $jd = $this->jd->get_by_id($id);
+    $jd = $this->Job_description_model->get_by_id($id);
     if(!$jd) show_404();
 
-    $approvals = $this->jd->get_approvals($id);
+    $approvals = $this->Job_description_model->get_approvals($id);
 
     $data = [
         'jd' => $jd,

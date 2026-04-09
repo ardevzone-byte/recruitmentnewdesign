@@ -8,10 +8,6 @@ class JobTitles extends CI_Controller
         $this->load->model('Job_titles_model', 'jtm');
         $this->load->helper(['url', 'form', 'security']);
         $this->load->library(['session', 'form_validation']);
-
-        if (!$this->session->userdata('logged_in')) {
-            redirect('users/login');
-        }
     }
 
     public function index()
@@ -23,12 +19,11 @@ class JobTitles extends CI_Controller
             'q'     => $q,
             'rows'  => $this->jtm->get_list($q, 200),
             'error' => null,
-            'extra_js' => ['newassets/js/job-titles-manage.js'],
         ];
 
         $this->load->view('template/new_header', $data);
         $this->load->view('recruitment/job_titles_manage', $data);
-        $this->load->view('template/new_footer', $data);
+        $this->load->view('template/new_footer');
     }
 
     public function create()
