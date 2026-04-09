@@ -16,12 +16,10 @@ class JobOffersReport extends CI_Controller
             'status' => trim((string) $this->input->get('status', true)),
         ];
 
-        $data['title']        = 'تقرير العروض الوظيفية';
-        $data['filters']      = $filters;
-        $data['offers']       = $this->Job_offers_model->get_list($filters);
-        $data['stats']        = $this->Job_offers_model->get_stats($filters);
-        $data['embed_shell']   = true;
-        $data['extra_css']     = 'https://unpkg.com/aos@2.3.1/dist/aos.css';
+        $data['title']   = 'تقرير العروض الوظيفية';
+        $data['filters'] = $filters;
+        $data['offers']  = $this->Job_offers_model->get_list($filters);
+        $data['stats']   = $this->Job_offers_model->get_stats($filters);
 
         $this->load->view('template/new_header', $data);
         $this->load->view('job_offers/report', $data);

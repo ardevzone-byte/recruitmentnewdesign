@@ -21,9 +21,7 @@ class JobTitles extends CI_Controller
             'error' => null,
         ];
 
-        $this->load->view('template/new_header', $data);
         $this->load->view('recruitment/job_titles_manage', $data);
-        $this->load->view('template/new_footer');
     }
 
     public function create()
