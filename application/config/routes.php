@@ -52,7 +52,13 @@ $route['job_description/approve/(:num)']    = 'JobDescription/approve/$1';
 $route['job_description/sign/(:num)']       = 'JobDescription/sign/$1';
 $route['job_description/export_pdf/(:num)'] = 'JobDescription/export_pdf/$1';
 
+$route['JobOffersReport'] = 'JobOffersReport/index';
+$route['JobOffersReport/ajax_list'] = 'JobOffersReport/ajax_list';
+$route['JobOffersReport/update_field'] = 'JobOffersReport/update_field';
 
+$route['jobs/view/(:num)'] = 'Jobs/view/$1';
+$route['candidates'] = 'Candidates/archive';
+$route['offers'] = 'Offers/dashboard';
 
 $route['SmsPlatform'] = 'SmsPlatform/index';
 $route['SmsPlatform/send'] = 'SmsPlatform/send';
